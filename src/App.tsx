@@ -1,121 +1,88 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { ThemeProvider } from "@/context/ThemeContext";
+import { ThemeToggle } from "@/components/ThemeToggle";
+import { ContrastToggle } from "@/components/ContrastToggle";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+/**
+ * Phase C verification harness.
+ *
+ * This minimal App demonstrates the theme system end-to-end:
+ * - `ThemeProvider` wraps the tree.
+ * - Both toggles are rendered so light/dark and normal/HC can be flipped.
+ * - A swatch grid shows every palette variable against bg and surface so
+ *   the 8 palette × theme × contrast combinations are visually inspectable.
+ *
+ * Phase D replaces this file with the real routing + layout shell.
+ */
+export default function App() {
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.tsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <ThemeProvider>
+      <div className="min-h-screen bg-bg text-text">
+        <header className="flex items-center justify-between border-b border-border bg-surface px-6 py-4">
+          <h1 className="text-2xl font-semibold">Bead-In — Theme Preview</h1>
+          <div className="flex items-center gap-2">
+            <ContrastToggle />
+            <ThemeToggle />
+          </div>
+        </header>
 
-      <div className="ticks"></div>
+        <main className="mx-auto max-w-4xl space-y-8 p-6">
+          <section>
+            <h2 className="mb-2 text-xl font-semibold">Typography</h2>
+            <p className="text-text">
+              Body text in <code>--color-text</code> on <code>--color-bg</code>.
+              Resize below 768px to swap to the purple palette.
+            </p>
+            <p className="text-text-muted">
+              Muted text in <code>--color-text-muted</code> for secondary
+              information.
+            </p>
+            <p>
+              This is a{" "}
+              <a href="#link-demo" onClick={(e) => e.preventDefault()}>
+                link
+              </a>{" "}
+              and this is a{" "}
+              <a
+                href="#visited-demo"
+                onClick={(e) => e.preventDefault()}
+                style={{ color: "var(--color-link-visited)" }}
+              >
+                visited link
+              </a>
+              .
+            </p>
+          </section>
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
+          <section>
+            <h2 className="mb-2 text-xl font-semibold">Accent swatches</h2>
+            <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+              {[1, 2, 3, 4, 5, 6].map((n) => (
+                <div
+                  key={n}
+                  className="flex aspect-square items-center justify-center rounded text-sm font-medium"
+                  style={{
+                    backgroundColor: `var(--accent-${n})`,
+                    color: "var(--bg)",
+                  }}
                 >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+                  accent-{n}
+                </div>
+              ))}
+            </div>
+          </section>
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+          <section>
+            <h2 className="mb-2 text-xl font-semibold">Surface block</h2>
+            <div className="rounded border border-border bg-surface p-4 text-text">
+              <p>
+                Surface background in <code>--color-surface</code>. Borders use{" "}
+                <code>--color-border</code>. This block should remain readable
+                against its parent background in every variant.
+              </p>
+            </div>
+          </section>
+        </main>
+      </div>
+    </ThemeProvider>
+  );
 }
-
-export default App
