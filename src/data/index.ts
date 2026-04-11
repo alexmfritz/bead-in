@@ -66,6 +66,19 @@ export const getShopItems = (): Item[] =>
     .slice()
     .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
 
+/**
+ * Items sorted newest-first by `createdAt`, across ALL statuses
+ * (available + sold + reserved). Used by Home "Latest work" and Gallery
+ * to showcase the full range of work regardless of purchase state.
+ * Pass an optional `limit` to cap the result length.
+ */
+export const getLatestItems = (limit?: number): Item[] => {
+  const sorted = items
+    .slice()
+    .sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+  return limit === undefined ? sorted : sorted.slice(0, limit);
+};
+
 /** Pair an item with its artist. Returns `undefined` if either is missing. */
 export const getItemWithArtist = (
   id: string,
