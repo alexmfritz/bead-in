@@ -4,7 +4,57 @@
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>bead-in</title>
+    <title>Bead-In</title>
+
+    <!--
+      Pre-hydration theme + contrast sync.
+
+      Runs synchronously before any CSS is parsed. Reads localStorage, falls
+      back to the user's OS preferences, and stamps `data-theme` +
+      `data-contrast` onto <html> so the first paint already has the correct
+      variables. Without this, a cold reload flashes the default variant for
+      ~50ms before React reads localStorage and updates the attributes.
+
+      Must stay in sync with the React ThemeContext initial-state logic.
+    -->
+    <script>
+      (function () {
+        try {
+          var THEME_KEY = "bead-in-theme";
+          var CONTRAST_KEY = "bead-in-contrast";
+
+          var storedTheme = localStorage.getItem(THEME_KEY);
+          var theme =
+            storedTheme === "dark" || storedTheme === "light"
+              ? storedTheme
+              : window.matchMedia &&
+                  window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "light";
+
+          var storedContrast = localStorage.getItem(CONTRAST_KEY);
+          var contrast =
+            storedContrast === "high" || storedContrast === "normal"
+              ? storedContrast
+              : window.matchMedia &&
+                  window.matchMedia("(prefers-contrast: more)").matches
+                ? "high"
+                : "normal";
+
+          document.documentElement.setAttribute("data-theme", theme);
+          document.documentElement.setAttribute("data-contrast", contrast);
+        } catch (_e) {
+          /* localStorage unavailable (private mode, etc.) — fall through to CSS defaults. */
+        }
+      })();
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap"
+      rel="stylesheet"
+    />
   </head>
   <body>
     <div id="root"></div>

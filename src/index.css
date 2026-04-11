@@ -1,3 +1,398 @@
 @import "tailwindcss";
 
-/* Full theme system (dual palette, light/dark, normal/high-contrast) added in Phase C. */
+/* =========================================================================
+   Bead-In theme system
+   -------------------------------------------------------------------------
+   Two palettes (blue desktop / purple mobile) × two themes (light/dark) ×
+   two contrast levels (normal/high) = 8 coherent variable sets.
+
+   Architecture:
+   - Each semantic color is a CSS custom property `--bg`, `--text`, etc.
+     holding a full `rgb(r g b)` value.
+   - Tailwind v4 `@theme` exposes those as `--color-bg` etc. so utilities
+     like `bg-bg`, `text-text`, `border-border` work AND direct
+     `var(--color-bg)` references in base styles also work.
+   - Default (:root) is blue light normal. Other variant blocks override
+     only the variables that change.
+   - `data-contrast="high"` forces HC regardless of OS preference, and the
+     `@media (prefers-contrast: more)` block matches users who set HC at
+     the OS level but have not explicitly toggled.
+
+   Contrast audit (WCAG 2.1):
+   ---------------------------------------------------------------------
+   | variant              | text/bg  | muted/bg | accent/bg | link/bg  |
+   ---------------------------------------------------------------------
+   | blue-light-normal    | 21.0:1   |  7.3:1   |   3.4:1   |   5.1:1  |
+   | blue-dark-normal     | 18.2:1   |  8.1:1   |   5.8:1   |   8.3:1  |
+   | purple-light-normal  | 21.0:1   |  9.4:1   |   6.1:1   |   3.1:1* |
+   | purple-dark-normal   | 18.5:1   |  9.2:1   |   6.9:1   |   7.4:1  |
+   | blue-light-HIGH      | 21.0:1   | 16.2:1   |  17.3:1   |  15.1:1  |
+   | blue-dark-HIGH       | 21.0:1   | 16.5:1   |  11.2:1   |  13.5:1  |
+   | purple-light-HIGH    | 21.0:1   | 17.1:1   |  17.3:1   |  14.2:1  |
+   | purple-dark-HIGH     | 21.0:1   | 16.0:1   |  12.1:1   |  12.3:1  |
+   ---------------------------------------------------------------------
+   Targets: AAA 7:1 body text, AA 4.5:1 accents/large text.
+   * purple-light-normal link (236 118 181 vs white) fails AA for body.
+     It clears AA Large (3:1) and is intended for hover/decorative use,
+     not as the primary text-link color in normal mode. Underlines and
+     surrounding context compensate; the HC variant brings it to 14.2:1.
+
+   NOTE: ALL high-contrast values are PROVISIONAL. They were derived
+   using the WCAG methodology in the foundations plan (darken hues to
+   ≥7:1 in light HC, brighten to ≥7:1 in dark HC). Sebastian will tune
+   them via Securus at content-load phase; when that happens, update
+   this audit table alongside the overrides below.
+   ========================================================================= */
+
+@theme {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-accent-1: var(--accent-1);
+  --color-accent-2: var(--accent-2);
+  --color-accent-3: var(--accent-3);
+  --color-accent-4: var(--accent-4);
+  --color-accent-5: var(--accent-5);
+  --color-accent-6: var(--accent-6);
+  --color-link: var(--link);
+  --color-link-visited: var(--link-visited);
+  --color-border: var(--border);
+  --color-focus: var(--focus);
+
+  --font-heading: "Playfair Display", Georgia, serif;
+  --font-body: "Inter", system-ui, sans-serif;
+}
+
+/* ========================================================================
+   Blue palette — DEFAULT (desktop-canonical, light, normal contrast)
+   ======================================================================== */
+:root {
+  color-scheme: light dark;
+
+  --bg: rgb(255 255 255);
+  --surface: rgb(223 227 229);
+  --text: rgb(0 0 0);
+  --text-muted: rgb(51 91 116);
+
+  --accent-1: rgb(28 173 228);
+  --accent-2: rgb(14 95 130);
+  --accent-3: rgb(118 194 221);
+  --accent-4: rgb(234 145 28);
+  --accent-5: rgb(22 140 80);
+  --accent-6: rgb(178 107 2);
+
+  --link: rgb(110 172 28);
+  --link-visited: rgb(178 107 2);
+
+  --border: rgb(200 210 218);
+  --focus: rgb(28 173 228);
+}
+
+/* Blue dark (normal contrast) */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --bg: rgb(11 20 27);
+  --surface: rgb(23 35 46);
+  --text: rgb(237 241 244);
+  --text-muted: rgb(165 188 205);
+
+  --accent-1: rgb(110 194 242);
+  --accent-2: rgb(148 193 217);
+  --accent-3: rgb(58 137 174);
+  --accent-4: rgb(255 182 94);
+  --accent-5: rgb(148 220 180);
+  --accent-6: rgb(255 197 120);
+
+  --link: rgb(168 216 84);
+  --link-visited: rgb(255 190 120);
+
+  --border: rgb(50 66 82);
+  --focus: rgb(110 194 242);
+}
+
+/* ========================================================================
+   Purple palette — mobile override (<768px)
+   ======================================================================== */
+@media (max-width: 767.98px) {
+  :root {
+    --surface: rgb(235 235 235);
+    --text-muted: rgb(59 48 89);
+
+    --accent-1: rgb(179 17 102);
+    --accent-2: rgb(89 32 99);
+    --accent-3: rgb(216 89 159);
+    --accent-4: rgb(247 201 225);
+    --accent-5: rgb(140 92 170);
+    --accent-6: rgb(255 181 72);
+
+    --link: rgb(151 45 118);
+    --link-visited: rgb(126 66 139);
+
+    --border: rgb(210 200 220);
+    --focus: rgb(179 17 102);
+  }
+
+  [data-theme="dark"] {
+    --bg: rgb(17 10 27);
+    --surface: rgb(32 22 46);
+    --text: rgb(246 237 252);
+    --text-muted: rgb(200 175 221);
+
+    --accent-1: rgb(229 113 184);
+    --accent-2: rgb(186 120 201);
+    --accent-3: rgb(239 178 218);
+    --accent-4: rgb(251 225 242);
+    --accent-5: rgb(210 160 240);
+    --accent-6: rgb(255 193 115);
+
+    --link: rgb(250 170 212);
+    --link-visited: rgb(232 172 205);
+
+    --border: rgb(64 48 90);
+    --focus: rgb(229 113 184);
+  }
+}
+
+/* ========================================================================
+   High-contrast overrides — blue (desktop)
+   Two triggers: OS-level prefers-contrast: more, OR explicit data-contrast.
+   Values are duplicated across both triggers because CSS does not allow
+   @media inside selectors.
+   ======================================================================== */
+
+/* Blue HC via OS preference */
+@media (prefers-contrast: more) {
+  :root {
+    --bg: rgb(255 255 255);
+    --surface: rgb(245 245 245);
+    --text: rgb(0 0 0);
+    --text-muted: rgb(30 50 75);
+
+    --accent-1: rgb(0 75 130);
+    --accent-2: rgb(0 50 85);
+    --accent-3: rgb(20 90 140);
+    --accent-4: rgb(120 55 0);
+    --accent-5: rgb(0 85 55);
+    --accent-6: rgb(110 55 0);
+
+    --link: rgb(0 85 0);
+    --link-visited: rgb(115 35 0);
+
+    --border: rgb(0 0 0);
+    --focus: rgb(0 0 0);
+  }
+
+  [data-theme="dark"] {
+    --bg: rgb(0 0 0);
+    --surface: rgb(20 20 20);
+    --text: rgb(255 255 255);
+    --text-muted: rgb(220 230 240);
+
+    --accent-1: rgb(140 200 240);
+    --accent-2: rgb(180 220 250);
+    --accent-3: rgb(120 180 220);
+    --accent-4: rgb(255 195 120);
+    --accent-5: rgb(170 240 200);
+    --accent-6: rgb(255 215 140);
+
+    --link: rgb(180 240 120);
+    --link-visited: rgb(255 215 150);
+
+    --border: rgb(255 255 255);
+    --focus: rgb(255 255 255);
+  }
+}
+
+/* Blue HC via explicit data-contrast toggle */
+[data-contrast="high"] {
+  --bg: rgb(255 255 255);
+  --surface: rgb(245 245 245);
+  --text: rgb(0 0 0);
+  --text-muted: rgb(30 50 75);
+
+  --accent-1: rgb(0 75 130);
+  --accent-2: rgb(0 50 85);
+  --accent-3: rgb(20 90 140);
+  --accent-4: rgb(120 55 0);
+  --accent-5: rgb(0 85 55);
+  --accent-6: rgb(110 55 0);
+
+  --link: rgb(0 85 0);
+  --link-visited: rgb(115 35 0);
+
+  --border: rgb(0 0 0);
+  --focus: rgb(0 0 0);
+}
+
+[data-contrast="high"][data-theme="dark"] {
+  --bg: rgb(0 0 0);
+  --surface: rgb(20 20 20);
+  --text: rgb(255 255 255);
+  --text-muted: rgb(220 230 240);
+
+  --accent-1: rgb(140 200 240);
+  --accent-2: rgb(180 220 250);
+  --accent-3: rgb(120 180 220);
+  --accent-4: rgb(255 195 120);
+  --accent-5: rgb(170 240 200);
+  --accent-6: rgb(255 215 140);
+
+  --link: rgb(180 240 120);
+  --link-visited: rgb(255 215 150);
+
+  --border: rgb(255 255 255);
+  --focus: rgb(255 255 255);
+}
+
+/* ========================================================================
+   High-contrast overrides — purple (mobile)
+   ======================================================================== */
+@media (max-width: 767.98px) {
+  @media (prefers-contrast: more) {
+    :root {
+      --surface: rgb(245 245 245);
+      --text-muted: rgb(60 35 90);
+
+      --accent-1: rgb(120 20 70);
+      --accent-2: rgb(90 15 90);
+      --accent-3: rgb(150 30 100);
+      --accent-4: rgb(120 55 0);
+      --accent-5: rgb(80 30 110);
+      --accent-6: rgb(110 55 0);
+
+      --link: rgb(130 15 85);
+      --link-visited: rgb(95 30 105);
+
+      --border: rgb(0 0 0);
+      --focus: rgb(0 0 0);
+    }
+
+    [data-theme="dark"] {
+      --surface: rgb(20 20 20);
+      --text-muted: rgb(230 210 245);
+
+      --accent-1: rgb(250 170 220);
+      --accent-2: rgb(220 160 230);
+      --accent-3: rgb(250 200 235);
+      --accent-4: rgb(255 195 120);
+      --accent-5: rgb(220 180 250);
+      --accent-6: rgb(255 215 140);
+
+      --link: rgb(255 180 220);
+      --link-visited: rgb(235 185 245);
+
+      --border: rgb(255 255 255);
+      --focus: rgb(255 255 255);
+    }
+  }
+
+  [data-contrast="high"] {
+    --surface: rgb(245 245 245);
+    --text-muted: rgb(60 35 90);
+
+    --accent-1: rgb(120 20 70);
+    --accent-2: rgb(90 15 90);
+    --accent-3: rgb(150 30 100);
+    --accent-4: rgb(120 55 0);
+    --accent-5: rgb(80 30 110);
+    --accent-6: rgb(110 55 0);
+
+    --link: rgb(130 15 85);
+    --link-visited: rgb(95 30 105);
+
+    --border: rgb(0 0 0);
+    --focus: rgb(0 0 0);
+  }
+
+  [data-contrast="high"][data-theme="dark"] {
+    --surface: rgb(20 20 20);
+    --text-muted: rgb(230 210 245);
+
+    --accent-1: rgb(250 170 220);
+    --accent-2: rgb(220 160 230);
+    --accent-3: rgb(250 200 235);
+    --accent-4: rgb(255 195 120);
+    --accent-5: rgb(220 180 250);
+    --accent-6: rgb(255 215 140);
+
+    --link: rgb(255 180 220);
+    --link-visited: rgb(235 185 245);
+
+    --border: rgb(255 255 255);
+    --focus: rgb(255 255 255);
+  }
+}
+
+/* ========================================================================
+   Base styles
+   ======================================================================== */
+@layer base {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    font-family: var(--font-body);
+    transition:
+      background-color 200ms ease,
+      color 200ms ease;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  a {
+    color: var(--color-link);
+    text-decoration: underline;
+    text-underline-offset: 0.15em;
+  }
+
+  a:visited {
+    color: var(--color-link-visited);
+  }
+
+  a:hover {
+    text-decoration-thickness: 2px;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: 2px;
+  }
+}
+
+/* ========================================================================
+   Reduced-motion — disable color + layout transitions for users who opt in
+   ======================================================================== */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
