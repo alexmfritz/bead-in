@@ -1,0 +1,82 @@
+[
+  {
+    "id": "thunderbird-medallion",
+    "artistId": "sebastian-smith",
+    "name": "Thunderbird Medallion",
+    "description": "[Item description — placeholder. Sebastian will send real description via Securus at content-load phase.]",
+    "status": "available",
+    "cost": { "price": 125 },
+    "materials": ["size 11 delica beads", "waxed nylon thread", "leather backing"],
+    "tags": ["medallion", "thunderbird", "traditional"],
+    "images": ["placeholder.svg"],
+    "createdAt": "2026-03-18",
+    "dimensions": "3\" diameter",
+    "technique": "peyote stitch"
+  },
+  {
+    "id": "eagle-feather-lanyard",
+    "artistId": "sebastian-smith",
+    "name": "Eagle Feather Lanyard",
+    "description": "[Item description — placeholder.]",
+    "status": "sold",
+    "cost": { "price": 150 },
+    "materials": ["size 11 seed beads", "hemp cord"],
+    "tags": ["lanyard", "eagle"],
+    "images": ["placeholder.svg", "placeholder.svg"],
+    "createdAt": "2026-02-04",
+    "technique": "brick stitch"
+  },
+  {
+    "id": "sunrise-keychain",
+    "artistId": "noah-rivera",
+    "name": "Sunrise Keychain",
+    "description": "[Item description — placeholder.]",
+    "status": "available",
+    "cost": { "price": 45, "discount": 0.15 },
+    "materials": ["size 11 delica beads", "split ring"],
+    "tags": ["keychain", "small", "gradient"],
+    "images": ["placeholder.svg", "placeholder.svg", "placeholder.svg"],
+    "createdAt": "2026-03-22",
+    "dimensions": "2\" × 1\"",
+    "technique": "peyote stitch"
+  },
+  {
+    "id": "turquoise-drop-earrings",
+    "artistId": "noah-rivera",
+    "name": "Turquoise Drop Earrings",
+    "description": "[Item description — placeholder.]",
+    "status": "reserved",
+    "cost": { "price": 85 },
+    "materials": ["size 15 seed beads", "sterling silver hooks", "turquoise chips"],
+    "tags": ["earrings", "drop", "turquoise"],
+    "images": ["placeholder.svg"],
+    "createdAt": "2026-03-01",
+    "technique": "fringe"
+  },
+  {
+    "id": "midnight-rose-cuff",
+    "artistId": "sebastian-smith",
+    "name": "Midnight Rose Cuff",
+    "description": "[Item description — placeholder.]",
+    "status": "available",
+    "cost": { "price": 185, "discount": 0.1 },
+    "materials": ["size 11 delica beads", "size 15 seed beads", "leather backing", "nickel snaps"],
+    "tags": ["cuff", "floral", "western"],
+    "images": ["placeholder.svg", "placeholder.svg", "placeholder.svg"],
+    "createdAt": "2026-03-28",
+    "dimensions": "7\" × 2\"",
+    "technique": "peyote stitch"
+  },
+  {
+    "id": "star-rosary",
+    "artistId": "noah-rivera",
+    "name": "Star Rosary",
+    "description": "[Item description — placeholder.]",
+    "status": "sold",
+    "cost": { "price": 95 },
+    "materials": ["6mm wooden beads", "pewter crucifix", "waxed cord"],
+    "tags": ["rosary", "devotional"],
+    "images": ["placeholder.svg", "placeholder.svg"],
+    "createdAt": "2026-01-14"
+  }
+]
