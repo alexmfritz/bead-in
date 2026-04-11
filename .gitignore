@@ -12,6 +12,14 @@ dist
 dist-ssr
 *.local
 
+# Environment files (secrets, per-machine config)
+.env
+.env.local
+.env.*.local
+
+# Tsc build incremental cache (node_modules/.tmp is covered by node_modules/)
+node_modules/.tmp
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
