@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" role="img" aria-label="Artist placeholder">
+  <rect width="400" height="400" fill="#b31166"/>
+  <rect x="20" y="20" width="360" height="360" fill="none" stroke="#ffffff" stroke-width="3" stroke-dasharray="12 8"/>
+  <text x="200" y="180" fill="#ffffff" font-family="Georgia, serif" font-size="32" font-weight="600" text-anchor="middle">Bead-In</text>
+  <text x="200" y="220" fill="#ffffff" font-family="Georgia, serif" font-size="22" text-anchor="middle">Artist placeholder</text>
+  <text x="200" y="250" fill="#f7c9e1" font-family="Georgia, serif" font-size="14" text-anchor="middle">replace with real photo</text>
+</svg>
