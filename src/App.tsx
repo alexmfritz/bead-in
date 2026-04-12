@@ -6,6 +6,7 @@ import Shop from "@/pages/Shop";
 import Gallery from "@/pages/Gallery";
 import Artists from "@/pages/Artists";
 import ArtistProfile from "@/pages/ArtistProfile";
+import ItemDetail from "@/pages/ItemDetail";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
 import NotFound from "@/pages/NotFound";
@@ -30,6 +31,7 @@ export default function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="/shop" element={<Shop />} />
+            <Route path="/items/:id" element={<ItemDetail />} />
             <Route path="/gallery" element={<Gallery />} />
             <Route path="/artists" element={<Artists />} />
             <Route path="/artists/:id" element={<ArtistProfile />} />
