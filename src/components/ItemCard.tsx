@@ -34,11 +34,10 @@ const STATUS_DOT_VAR: Record<ItemStatus, string> = {
 /**
  * Reusable item showcase card.
  *
- * - Wraps the entire card in a `<Link>` so clicking anywhere navigates.
- *   React Router's Link renders an anchor, which is valid HTML5 around
- *   block content and gives screen readers a single accessible name.
- * - Cards link to `/artists/:id` for now — Bead-In does not yet have
- *   item-detail routes. When they land, swap the target here.
+ * Wraps the entire card in a `<Link>` so clicking anywhere navigates to
+ * the item detail page. React Router's Link renders an anchor, which is
+ * valid HTML5 around block content and gives screen readers a single
+ * accessible name.
  */
 export default function ItemCard({ item, showPrice = false }: ItemCardProps) {
   // FK validation at data/index.ts module load guarantees this lookup resolves.
@@ -47,7 +46,7 @@ export default function ItemCard({ item, showPrice = false }: ItemCardProps) {
 
   return (
     <Link
-      to={`/artists/${item.artistId}`}
+      to={`/items/${item.id}`}
       className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-bg no-underline transition-colors hover:border-accent-1"
     >
       <div className="aspect-square w-full overflow-hidden bg-surface">
