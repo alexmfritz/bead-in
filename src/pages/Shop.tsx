@@ -1,6 +1,7 @@
 import { useMemo, useState } from "react";
 import { getActiveArtists, items as allItems } from "@/data";
 import { useFilters } from "@/hooks/useFilters";
+import SectionHeader from "@/components/SectionHeader";
 import ItemCard from "@/components/ItemCard";
 import FilterPanel from "@/components/FilterPanel";
 
@@ -57,15 +58,13 @@ export default function Shop() {
   return (
     <section className="bg-bg">
       <div className="mx-auto max-w-6xl px-4 py-12 md:py-16">
-        <header className="mb-8">
-          <h1 className="font-heading text-4xl font-semibold text-text md:text-5xl">
-            Shop
-          </h1>
-          <p className="mt-2 text-base text-text-muted">
-            [Browse every piece — filter by artist, status, price, materials,
-            or tags. Inquiries go through the Contact page.]
-          </p>
-        </header>
+        <div className="mb-8">
+          <SectionHeader
+            as="h1"
+            headline="Shop"
+            subheadline="[Browse every piece — filter by artist, status, price, materials, or tags. Inquiries go through the Contact page.]"
+          />
+        </div>
 
         <div className="grid gap-8 lg:grid-cols-[18rem_1fr] lg:items-start lg:gap-10">
           {/* Sidebar (desktop) / collapsible panel (mobile) */}

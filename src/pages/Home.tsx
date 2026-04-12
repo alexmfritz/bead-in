@@ -1,28 +1,21 @@
 import { Link } from "react-router-dom";
 import { getActiveArtists, getLatestItems } from "@/data";
 import { resolveAsset } from "@/lib/format";
+import Section from "@/components/Section";
+import SectionHeader from "@/components/SectionHeader";
 import ItemCard from "@/components/ItemCard";
 import ArtistCard from "@/components/ArtistCard";
 
 /**
- * Home page — first real page build in Bead-In.
+ * Home page — five sections using the shared Section/SectionHeader
+ * vocabulary so the editorial structure (eyebrow, headline, subheadline)
+ * is consistent and easy to talk about with Sebastian and Noah.
  *
- * Five sections composed inline (sectional reuse comes later when the
- * same patterns appear on About, Shop, etc.):
- *   1. Hero          — Playfair H1 + tagline + two CTA buttons, plus a
- *                      placeholder hero image on desktop.
- *   2. Featured work — 6 newest items across all statuses via
- *                      getLatestItems(6), rendered as ItemCards without
- *                      prices (showPrice defaults to false).
- *   3. Meet artists  — ArtistCards for every active artist from
- *                      getActiveArtists().
- *   4. Mission       — narrow centered column with placeholder copy.
- *   5. Contact CTA   — primary call-to-action to the /contact route.
- *
- * Background alternates bg-bg → bg-bg → bg-surface → bg-bg → bg-surface
- * so the page has visual rhythm without any custom CSS rules. All colors
- * come from the theme tokens — the same file produces 8 coherent variants
- * across blue/purple × light/dark × normal/high-contrast.
+ *   1. Hero          — h1, tagline, two CTAs, placeholder image.
+ *   2. Featured work — 6 newest items via getLatestItems(6).
+ *   3. Meet artists  — ArtistCards for active artists.
+ *   4. Mission       — eyebrow + headline + placeholder prose.
+ *   5. Contact CTA   — headline + subheadline + primary CTA button.
  */
 export default function Home() {
   const latestItems = getLatestItems(6);
@@ -35,14 +28,11 @@ export default function Home() {
       <section className="bg-bg">
         <div className="mx-auto grid max-w-5xl gap-10 px-4 py-16 md:grid-cols-12 md:gap-12 md:py-24">
           <div className="flex flex-col justify-center gap-6 md:col-span-7">
-            <h1 className="font-heading text-4xl font-semibold leading-tight text-text md:text-5xl lg:text-6xl">
-              Beadwork from inside.
-            </h1>
-            <p className="max-w-xl text-lg leading-relaxed text-text-muted">
-              [Handmade portfolio by Sebastian Smith and Noah Rivera,
-              collaborating from inside. Every piece is one of one — designed,
-              beaded, and finished by hand.]
-            </p>
+            <SectionHeader
+              as="h1"
+              headline="Beadwork from inside."
+              subheadline="[Handmade portfolio by Sebastian Smith and Noah Rivera, collaborating from inside. Every piece is one of one — designed, beaded, and finished by hand.]"
+            />
             <div className="flex flex-wrap gap-3 pt-2">
               <Link
                 to="/artists"
@@ -76,68 +66,53 @@ export default function Home() {
       </section>
 
       {/* ---------- 2. Featured work ---------- */}
-      <section className="bg-bg">
-        <div className="mx-auto max-w-5xl px-4 py-16 md:py-24">
-          <div className="mb-10 flex flex-col gap-2 md:flex-row md:items-end md:justify-between">
-            <div>
-              <h2 className="font-heading text-3xl font-semibold text-text md:text-4xl">
-                Latest work
-              </h2>
-              <p className="mt-2 text-base text-text-muted">
-                [A selection from the studio — visit the shop for everything
-                available.]
-              </p>
-            </div>
-            <Link
-              to="/shop"
-              className="text-sm font-medium"
-              style={{ color: "var(--accent-1)" }}
-            >
-              View all items →
-            </Link>
-          </div>
-
+      <Section>
+        <div className="space-y-10">
+          <SectionHeader
+            headline="Latest work"
+            subheadline="[A selection from the studio — visit the shop for everything available.]"
+            action={
+              <Link
+                to="/shop"
+                className="text-sm font-medium"
+                style={{ color: "var(--accent-1)" }}
+              >
+                View all items →
+              </Link>
+            }
+          />
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {latestItems.map((item) => (
               <ItemCard key={item.id} item={item} />
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* ---------- 3. Meet the artists ---------- */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-5xl px-4 py-16 md:py-24">
-          <div className="mb-10 text-center">
-            <h2 className="font-heading text-3xl font-semibold text-text md:text-4xl">
-              Meet the artists
-            </h2>
-            <p className="mt-2 text-base text-text-muted">
-              [Two artists, collaborating via the Securus messaging system.
-              Every piece runs through their hands.]
-            </p>
-          </div>
-
+      <Section background="surface">
+        <div className="space-y-10">
+          <SectionHeader
+            headline="Meet the artists"
+            subheadline="[Two artists, collaborating via the Securus messaging system. Every piece runs through their hands.]"
+            align="center"
+          />
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
             {artists.map((artist) => (
               <ArtistCard key={artist.id} artist={artist} />
             ))}
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* ---------- 4. Mission ---------- */}
-      <section className="bg-bg">
-        <div className="mx-auto max-w-2xl px-4 py-16 text-center md:py-24">
-          <p
-            className="mb-3 text-xs font-semibold uppercase tracking-widest"
-            style={{ color: "var(--accent-1)" }}
-          >
-            Why we&rsquo;re here
-          </p>
-          <h2 className="mb-6 font-heading text-3xl font-semibold text-text md:text-4xl">
-            [Inclusion. Second chances. Craft that speaks for itself.]
-          </h2>
+      <Section width="narrow">
+        <div className="space-y-6 text-center">
+          <SectionHeader
+            eyebrow="Why we're here"
+            headline="[Inclusion. Second chances. Craft that speaks for itself.]"
+            align="center"
+          />
           <div className="space-y-4 text-left text-base leading-relaxed text-text-muted">
             <p>
               [Bead-In is a portfolio and inquiry site for handmade beadwork
@@ -159,19 +134,16 @@ export default function Home() {
             </p>
           </div>
         </div>
-      </section>
+      </Section>
 
       {/* ---------- 5. Contact CTA ---------- */}
-      <section className="bg-surface">
-        <div className="mx-auto max-w-3xl px-4 py-16 text-center md:py-20">
-          <h2 className="mb-4 font-heading text-3xl font-semibold text-text md:text-4xl">
-            [Interested in a piece? Start a conversation.]
-          </h2>
-          <p className="mb-8 text-base leading-relaxed text-text-muted">
-            [Inquiries go through our Contact form — we reply as soon as
-            messages clear the prison messaging system. Include the item name
-            in your message and we&rsquo;ll get back to you with details.]
-          </p>
+      <Section background="surface" width="narrow">
+        <div className="space-y-8 text-center">
+          <SectionHeader
+            headline="[Interested in a piece? Start a conversation.]"
+            subheadline="[Inquiries go through our Contact form — we reply as soon as messages clear the prison messaging system. Include the item name in your message and we'll get back to you with details.]"
+            align="center"
+          />
           <Link
             to="/contact"
             className="inline-flex items-center justify-center rounded-md px-6 py-3 text-sm font-semibold no-underline transition-opacity hover:opacity-90"
@@ -183,7 +155,7 @@ export default function Home() {
             Contact us →
           </Link>
         </div>
-      </section>
+      </Section>
     </>
   );
 }
