@@ -93,10 +93,47 @@ export default function Gallery() {
 /*  Local sub-components                                               */
 /* ------------------------------------------------------------------ */
 
-/** Every 5th tile gets the large 2×2 treatment. */
-function isFeaturedTile(index: number): boolean {
-  return index % 5 === 0;
+/**
+ * Tile shape within the mosaic grid. A 10-item cycle mixes four accent
+ * shapes among the standard 1×1 tiles so the pattern never feels
+ * repetitive. `grid-auto-flow: dense` fills gaps automatically.
+ *
+ *   Index 0 → large  (2 col × 2 row)  — hero showcase
+ *   Index 3 → wide   (2 col × 1 row)  — landscape strip
+ *   Index 5 → tall   (1 col × 2 row)  — portrait column
+ *   Index 8 → wide   (2 col × 1 row)  — second landscape
+ *   All others → normal (1 col × 1 row)
+ */
+type TileShape = "normal" | "large" | "wide" | "tall";
+
+const SHAPE_CYCLE: Record<number, TileShape> = {
+  0: "large",
+  3: "wide",
+  5: "tall",
+  8: "wide",
+};
+
+function getTileShape(index: number): TileShape {
+  return SHAPE_CYCLE[index % 10] ?? "normal";
 }
+
+const SHAPE_CLASSES: Record<TileShape, string> = {
+  normal: "",
+  large: "sm:col-span-2 sm:row-span-2",
+  wide: "sm:col-span-2",
+  tall: "sm:row-span-2",
+};
+
+/**
+ * Aspect ratio per tile shape so the inner content fills its grid area
+ * without black bars. On mobile (single column) everything is square.
+ */
+const SHAPE_ASPECT: Record<TileShape, string> = {
+  normal: "aspect-square",
+  large: "aspect-square",
+  wide: "aspect-square sm:aspect-[2/1]",
+  tall: "aspect-square sm:aspect-[1/2]",
+};
 
 const STATUS_LABELS: Record<ItemStatus, string> = {
   available: "Available",
@@ -119,7 +156,7 @@ interface GalleryTileProps {
 function GalleryTile({ item, index, onClick }: GalleryTileProps) {
   const artist = getArtistById(item.artistId);
   const imageSrc = resolveAsset(item.images[0] ?? "placeholder.svg", "items");
-  const featured = isFeaturedTile(index);
+  const shape = getTileShape(index);
   const photoCount = item.images.length;
 
   return (
@@ -127,10 +164,10 @@ function GalleryTile({ item, index, onClick }: GalleryTileProps) {
       type="button"
       onClick={onClick}
       aria-label={`View ${item.name} by ${artist?.name ?? "Unknown"} — ${photoCount} photo${photoCount !== 1 ? "s" : ""}`}
-      className={`group relative cursor-pointer overflow-hidden rounded-lg border border-border ${featured ? "sm:col-span-2 sm:row-span-2" : ""}`}
+      className={`group relative cursor-pointer overflow-hidden rounded-lg border border-border ${SHAPE_CLASSES[shape]}`}
     >
       <motion.div
-        className="relative aspect-square w-full"
+        className={`relative w-full ${SHAPE_ASPECT[shape]}`}
         whileHover={{ scale: 1.03 }}
         transition={{ duration: 0.3, ease: "easeOut" }}
       >
