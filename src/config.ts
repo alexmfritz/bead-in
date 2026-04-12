@@ -1,22 +1,13 @@
 /**
- * Typed re-export of `src/data/config.json`. Centralizes the runtime config
- * access point so consumers can `import { siteMode } from "@/config"` without
- * touching raw JSON.
- *
- * Runtime validation narrows the JSON string to the `Config["siteMode"]`
- * union so consumers get proper literal-type comparisons.
+ * Typed re-export of `src/data/config.json`. Currently carries no active
+ * fields — this module exists so future additions have an obvious home
+ * and so `config.json` is validated against the `Config` type at every
+ * build. To add a field, update `Config` in `@/types`, the JSON, and
+ * destructure the new value below.
  */
 import type { Config } from "@/types";
 import configJson from "@/data/config.json";
 
-const isValidMode = (m: string): m is Config["siteMode"] =>
-  m === "preview" || m === "live";
+export const config = configJson satisfies Config;
 
-const rawMode = configJson.siteMode;
-if (!isValidMode(rawMode)) {
-  throw new Error(
-    `[bead-in config] invalid siteMode "${rawMode}". Valid: "preview" | "live".`,
-  );
-}
-
-export const siteMode: Config["siteMode"] = rawMode;
+export type { Config };

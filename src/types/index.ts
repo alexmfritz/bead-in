@@ -52,10 +52,15 @@ export interface Artist {
   active: boolean;
 }
 
-export interface Config {
-  /**
-   * `"preview"` shows a banner on every page indicating the site is in
-   * preview mode; `"live"` hides it. Flip to `"live"` on launch.
-   */
-  siteMode: "preview" | "live";
-}
+/**
+ * Runtime configuration shape.
+ *
+ * Currently empty — `config.json` ships as `{}` and `src/config.ts` is a
+ * landing zone for future fields (feature flags, contact overrides,
+ * featured counts, etc.). To add a field:
+ *
+ *   1. Add the property here in `Config`.
+ *   2. Add the value to `src/data/config.json`.
+ *   3. Add a type guard + export in `src/config.ts`.
+ */
+export type Config = Record<string, never>;
