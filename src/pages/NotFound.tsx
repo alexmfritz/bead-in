@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom";
+import Section from "@/components/Section";
+import SectionHeader from "@/components/SectionHeader";
 
 export default function NotFound() {
   return (
-    <section className="mx-auto max-w-3xl px-4 py-12">
-      <h1 className="mb-4 text-4xl font-semibold">Page not found</h1>
-      <p className="mb-6 text-lg text-text-muted">
-        The page you were looking for doesn&rsquo;t exist. It may have moved or
-        never been there at all.
-      </p>
-      <Link to="/" className="font-medium">
-        ← Back to home
-      </Link>
-    </section>
+    <Section>
+      <div className="space-y-6">
+        <SectionHeader
+          as="h1"
+          headline="Page not found"
+          subheadline="The page you were looking for doesn't exist. It may have moved or never been there at all."
+        />
+        <Link to="/" className="font-medium">
+          ← Back to home
+        </Link>
+      </div>
+    </Section>
   );
 }
