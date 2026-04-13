@@ -31,7 +31,7 @@ export default function Home() {
             <SectionHeader
               as="h1"
               headline="Beadwork from inside."
-              subheadline="[Handmade portfolio by Sebastian Smith and Noah Rivera, collaborating from inside. Every piece is one of one — designed, beaded, and finished by hand.]"
+              subheadline="[Handmade portfolio by Sebastian Smith and Noah Doty, collaborating from inside. Every piece is one of one — designed, beaded, and finished by hand.]"
             />
             <div className="flex flex-wrap gap-3 pt-2">
               <Link

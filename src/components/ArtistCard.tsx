@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import type { Artist } from "@/types";
+import { getItemsByArtist } from "@/data";
 import { resolveAsset } from "@/lib/format";
 
 interface ArtistCardProps {
@@ -19,35 +20,50 @@ const previewBio = (bio: string): string => {
 };
 
 /**
- * Reusable artist card used on the Home page and (later) the Artists
- * index. Shows the artist photo, name, a truncated bio, and a link to
- * their profile. Uses a circular image frame to differentiate from the
- * square item cards.
+ * Reusable artist showcase card, structured to mirror ItemCard.
+ *
+ * Wraps the entire card in a `<Link>` so clicking anywhere navigates to
+ * the artist profile. Shows a square photo, name, specialties pills,
+ * truncated bio, and piece count.
  */
 export default function ArtistCard({ artist }: ArtistCardProps) {
   const photoSrc = resolveAsset(artist.photo, "artists");
+  const itemCount = getItemsByArtist(artist.id).length;
 
   return (
-    <article className="flex flex-col items-center gap-4 rounded-lg border border-border bg-bg p-6 text-center sm:flex-row sm:items-start sm:gap-6 sm:text-left">
-      <img
-        src={photoSrc}
-        alt={`Placeholder — replace with photo of ${artist.name}`}
-        className="h-24 w-24 flex-shrink-0 rounded-full border border-border object-cover"
-        loading="lazy"
-      />
-      <div className="flex flex-1 flex-col gap-2">
-        <h3 className="font-heading text-xl font-semibold text-text">
+    <Link
+      to={`/artists/${artist.id}`}
+      className="group flex h-full flex-col overflow-hidden rounded-lg border border-border bg-bg no-underline transition-colors hover:border-accent-1"
+    >
+      <div className="aspect-square w-full overflow-hidden bg-surface">
+        <img
+          src={photoSrc}
+          alt={`Placeholder — replace with photo of ${artist.name}`}
+          className="h-full w-full object-cover"
+          loading="lazy"
+        />
+      </div>
+      <div className="flex flex-1 flex-col gap-2 p-4">
+        <h3 className="font-heading text-lg font-semibold leading-tight text-text">
           {artist.name}
         </h3>
+        {artist.specialties.length > 0 && (
+          <div className="flex flex-wrap gap-1.5">
+            {artist.specialties.map((s) => (
+              <span
+                key={s}
+                className="rounded-full border border-border bg-surface px-2.5 py-0.5 text-xs font-medium text-text"
+              >
+                {s}
+              </span>
+            ))}
+          </div>
+        )}
         <p className="text-sm text-text-muted">{previewBio(artist.bio)}</p>
-        <Link
-          to={`/artists/${artist.id}`}
-          className="text-sm font-medium"
-          style={{ color: "var(--accent-1)" }}
-        >
-          View profile →
-        </Link>
+        <p className="mt-auto pt-2 text-xs text-text-muted">
+          {itemCount} {itemCount === 1 ? "piece" : "pieces"}
+        </p>
       </div>
-    </article>
+    </Link>
   );
 }
