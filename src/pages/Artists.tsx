@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { getActiveArtists } from "@/data";
+import ArtistCard from "@/components/ArtistCard";
 import Section from "@/components/Section";
 import SectionHeader from "@/components/SectionHeader";
 
@@ -8,21 +8,17 @@ export default function Artists() {
 
   return (
     <Section>
-      <div className="space-y-6">
+      <div className="space-y-10">
         <SectionHeader
           as="h1"
           headline="Artists"
-          subheadline="[Artists index — placeholder list of active artists below, linking to their profile pages.]"
+          subheadline="[The artists behind Bead-In. Each piece is designed, beaded, and finished by hand.]"
         />
-        <ul className="space-y-2">
-          {artists.map((a) => (
-            <li key={a.id}>
-              <Link to={`/artists/${a.id}`} className="font-medium">
-                {a.name}
-              </Link>
-            </li>
+        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+          {artists.map((artist) => (
+            <ArtistCard key={artist.id} artist={artist} />
           ))}
-        </ul>
+        </div>
       </div>
     </Section>
   );

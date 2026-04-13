@@ -13,7 +13,7 @@ export default function Footer() {
       </p>
       <p className="m-0 mt-1">
         <small>
-          Handmade beadwork by Sebastian Smith and Noah Rivera. Portfolio and
+          Handmade beadwork by Sebastian Smith and Noah Doty. Portfolio and
           inquiries only — no online checkout.
         </small>
       </p>

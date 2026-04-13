@@ -50,6 +50,8 @@ export interface Artist {
   /** Relative photo filename; resolved via `resolveAsset(path, "artists")`. */
   photo: string;
   active: boolean;
+  /** Art mediums the artist works in, e.g. `["beadwork", "painting"]`. */
+  specialties: string[];
 }
 
 /**
