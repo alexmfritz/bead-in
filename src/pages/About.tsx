@@ -16,12 +16,33 @@ export default function About() {
   return (
     <>
       {/* ---------- 1. Hero ---------- */}
-      <Section width="narrow">
-        <SectionHeader
-          as="h1"
-          headline="About Bead-In"
-          subheadline="[A portfolio and inquiry site for handmade artwork by incarcerated artists Sebastian Smith and Noah Doty.]"
-        />
+      <Section background="surface">
+        <motion.div
+          className="mx-auto max-w-2xl space-y-6 text-center"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <p
+            className="text-xs font-semibold uppercase tracking-widest"
+            style={{ color: "var(--accent-1)" }}
+          >
+            Our story
+          </p>
+          <h1 className="font-heading text-4xl font-bold text-text md:text-5xl lg:text-6xl">
+            About Bead-In
+          </h1>
+          <div
+            className="mx-auto h-1 w-16 rounded-full"
+            style={{ backgroundColor: "var(--accent-1)" }}
+            aria-hidden="true"
+          />
+          <p className="text-lg leading-relaxed text-text-muted md:text-xl">
+            [A portfolio and inquiry site for handmade artwork by
+            incarcerated artists Sebastian Smith and Noah Doty. Every piece
+            is one of one — designed, beaded, and finished by hand.]
+          </p>
+        </motion.div>
       </Section>
 
       {/* ---------- 2. Our Mission ---------- */}
