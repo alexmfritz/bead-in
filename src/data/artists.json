@@ -3,7 +3,7 @@
     "id": "sebastian-smith",
     "name": "Sebastian Smith",
     "bio": "[Artist bio — 2-3 paragraphs. Sebastian will send real bio text via Securus once the foundations site is ready for content.]",
-    "photo": "placeholder.svg",
+    "photo": "sebastian-smith.jpg",
     "active": true,
     "specialties": ["beadwork", "leatherwork"]
   },
@@ -11,8 +11,16 @@
     "id": "noah-doty",
     "name": "Noah Doty",
     "bio": "[Artist bio — 2-3 paragraphs. Noah will send real bio text via Securus once the foundations site is ready for content.]",
-    "photo": "placeholder.svg",
+    "photo": "artist-placeholder.jpg",
     "active": true,
     "specialties": ["beadwork", "painting", "drawing"]
+  },
+  {
+    "id": "alex-fritz",
+    "name": "Alex Fritz",
+    "bio": "[The developer behind Bead-In. Alex is a CIS-certified web developer who builds the platform that showcases Sebastian and Noah's work. The website itself is Alex's art form — designed, coded, and maintained as a labor of craft in its own right.]",
+    "photo": "alex-fritz.jpg",
+    "active": true,
+    "specialties": ["web development"]
   }
 ]

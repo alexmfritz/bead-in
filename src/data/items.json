@@ -8,7 +8,7 @@
     "cost": { "price": 125 },
     "materials": ["size 11 delica beads", "waxed nylon thread", "leather backing"],
     "tags": ["medallion", "thunderbird", "traditional"],
-    "images": ["placeholder.svg"],
+    "images": ["kc-medallion-side.jpg", "kc-medallion-flat.jpg"],
     "createdAt": "2026-03-18",
     "dimensions": "3\" diameter",
     "technique": "peyote stitch"
@@ -22,7 +22,7 @@
     "cost": { "price": 150 },
     "materials": ["size 11 seed beads", "hemp cord"],
     "tags": ["lanyard", "eagle"],
-    "images": ["placeholder.svg", "placeholder.svg"],
+    "images": ["nfl-medallions-upright.jpg", "nfl-medallions-flat.jpg"],
     "createdAt": "2026-02-04",
     "technique": "brick stitch"
   },
@@ -35,7 +35,7 @@
     "cost": { "price": 45, "discount": 0.15 },
     "materials": ["size 11 delica beads", "split ring"],
     "tags": ["keychain", "small", "gradient"],
-    "images": ["placeholder.svg", "placeholder.svg", "placeholder.svg"],
+    "images": ["dreamcatchers-row.jpg", "dreamcatchers-closeup.jpg", "dreamcatchers-hanging.jpg"],
     "createdAt": "2026-03-22",
     "dimensions": "2\" × 1\"",
     "technique": "peyote stitch"
@@ -49,7 +49,7 @@
     "cost": { "price": 85 },
     "materials": ["size 15 seed beads", "sterling silver hooks", "turquoise chips"],
     "tags": ["earrings", "drop", "turquoise"],
-    "images": ["placeholder.svg"],
+    "images": ["dreamcatchers-grid.jpg"],
     "createdAt": "2026-03-01",
     "technique": "fringe"
   },
@@ -62,7 +62,7 @@
     "cost": { "price": 185, "discount": 0.1 },
     "materials": ["size 11 delica beads", "size 15 seed beads", "leather backing", "nickel snaps"],
     "tags": ["cuff", "floral", "western"],
-    "images": ["placeholder.svg", "placeholder.svg", "placeholder.svg"],
+    "images": ["nfl-medallions-grid.jpg", "kc-medallion-side.jpg", "kc-medallion-flat.jpg"],
     "createdAt": "2026-03-28",
     "dimensions": "7\" × 2\"",
     "technique": "peyote stitch"
@@ -76,7 +76,21 @@
     "cost": { "price": 95 },
     "materials": ["6mm wooden beads", "pewter crucifix", "waxed cord"],
     "tags": ["rosary", "devotional"],
-    "images": ["placeholder.svg", "placeholder.svg"],
+    "images": ["dreamcatchers-hanging.jpg", "dreamcatchers-closeup.jpg"],
     "createdAt": "2026-01-14"
+  },
+  {
+    "id": "rlyeh-rises",
+    "artistId": "noah-doty",
+    "name": "R'lyeh Rises",
+    "description": "[Original ink drawing by Noah. Dark fantasy illustration — placeholder description until Noah sends real text via Securus.]",
+    "status": "available",
+    "cost": { "price": 200 },
+    "materials": ["ink", "archival paper"],
+    "tags": ["drawing", "ink", "dark fantasy", "illustration"],
+    "images": ["rlyeh-rises-drawing.jpg"],
+    "createdAt": "2026-04-01",
+    "dimensions": "11\" × 14\"",
+    "technique": "ink illustration"
   }
 ]
