@@ -59,6 +59,9 @@
   --color-link-visited: var(--link-visited);
   --color-border: var(--border);
   --color-focus: var(--focus);
+  --color-error-bg: var(--error-bg);
+  --color-error-border: var(--error-border);
+  --color-error-text: var(--error-text);
 
   --font-heading: "Playfair Display", Georgia, serif;
   --font-body: "Inter", system-ui, sans-serif;
@@ -87,6 +90,11 @@
 
   --border: rgb(200 210 218);
   --focus: rgb(28 173 228);
+
+  /* Error state (shared across palettes — red has no blue/purple variant). */
+  --error-text: rgb(185 28 28); /* red-700, 5.9:1 on white */
+  --error-bg: rgb(254 242 242); /* red-50 */
+  --error-border: rgb(252 165 165); /* red-300 */
 }
 
 /* Blue dark (normal contrast) */
@@ -110,6 +118,11 @@
 
   --border: rgb(50 66 82);
   --focus: rgb(110 194 242);
+
+  /* Error state for dark themes (brighter red that reads on dark bg). */
+  --error-text: rgb(252 165 165); /* red-300, ~7.5:1 on --bg */
+  --error-bg: rgb(69 10 10 / 0.4); /* red-950 at 40% */
+  --error-border: rgb(153 27 27); /* red-800 */
 }
 
 /* ========================================================================

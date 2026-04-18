@@ -4,7 +4,7 @@ import SectionHeader from "@/components/SectionHeader";
 
 export default function NotFound() {
   return (
-    <Section>
+    <Section ariaLabel="Page not found">
       <div className="space-y-6">
         <SectionHeader
           as="h1"

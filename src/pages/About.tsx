@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { motion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import Section from "@/components/Section";
 import SectionHeader from "@/components/SectionHeader";
 import { resolveAsset } from "@/lib/format";
@@ -13,13 +13,18 @@ import { resolveAsset } from "@/lib/format";
  * until Sebastian and Noah provide real text via Securus.
  */
 export default function About() {
+  const shouldReduceMotion = useReducedMotion();
+  const heroInitial = shouldReduceMotion
+    ? { opacity: 1, y: 0 }
+    : { opacity: 0, y: 20 };
+
   return (
     <>
       {/* ---------- 1. Hero ---------- */}
-      <Section background="surface">
+      <Section background="surface" ariaLabel="About Bead-In">
         <motion.div
           className="mx-auto max-w-2xl space-y-6 text-center"
-          initial={{ opacity: 0, y: 20 }}
+          initial={heroInitial}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
         >
@@ -51,6 +56,7 @@ export default function About() {
         imageSrc={resolveAsset("sebastian-smith-mural.jpg", "artists")}
         imageAlt="Sebastian Smith in front of an inspirational mural"
         background="surface"
+        ariaLabel="Our mission"
       >
         <SectionHeader
           as="h2"
@@ -83,6 +89,7 @@ export default function About() {
         imagePosition="right"
         imageSrc={resolveAsset("nfl-medallions-flat.jpg", "items")}
         imageAlt="Collection of handmade beaded NFL team medallions"
+        ariaLabel="How it works"
       >
         <SectionHeader
           as="h2"
@@ -132,6 +139,7 @@ export default function About() {
         imageSrc={resolveAsset("dreamcatchers-row.jpg", "items")}
         imageAlt="Handmade beaded dreamcatchers"
         background="surface"
+        ariaLabel="Contact call to action"
       >
         <SectionHeader
           as="h2"
@@ -164,6 +172,7 @@ interface ContentBlockProps {
   imageSrc: string;
   imageAlt: string;
   background?: "bg" | "surface";
+  ariaLabel?: string;
   children: React.ReactNode;
 }
 
@@ -179,19 +188,29 @@ function ContentBlock({
   imageSrc,
   imageAlt,
   background,
+  ariaLabel,
   children,
 }: ContentBlockProps) {
+  const shouldReduceMotion = useReducedMotion();
   const imageOnRight = imagePosition === "right";
 
-  /* Text slides away from the image side */
+  /* Text slides away from the image side. When reduced-motion is on, the
+     initial state matches the final state so content is always visible
+     and never relies on scroll-in animation to appear. */
   const textInitialX = imageOnRight ? 30 : -30;
+  const imageInitial = shouldReduceMotion
+    ? { opacity: 1, scale: 1 }
+    : { opacity: 0, scale: 0.95 };
+  const textInitial = shouldReduceMotion
+    ? { opacity: 1, x: 0 }
+    : { opacity: 0, x: textInitialX };
 
   return (
-    <Section background={background}>
+    <Section background={background} ariaLabel={ariaLabel}>
       <div className="grid items-center gap-8 md:grid-cols-2 md:gap-12">
         <motion.div
           className={`overflow-hidden rounded-lg bg-surface ${imageOnRight ? "md:order-2" : ""}`}
-          initial={{ opacity: 0, scale: 0.95 }}
+          initial={imageInitial}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut" }}
@@ -206,7 +225,7 @@ function ContentBlock({
 
         <motion.div
           className={`space-y-6 ${imageOnRight ? "md:order-1" : ""}`}
-          initial={{ opacity: 0, x: textInitialX }}
+          initial={textInitial}
           whileInView={{ opacity: 1, x: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}

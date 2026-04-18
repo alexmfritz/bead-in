@@ -16,7 +16,7 @@ export default function ItemDetail() {
 
   if (!result) {
     return (
-      <Section>
+      <Section ariaLabel="Item not found">
         <div className="space-y-6">
           <SectionHeader
             as="h1"
@@ -38,7 +38,7 @@ export default function ItemDetail() {
   return (
     <>
       {/* Hero: image + core info */}
-      <Section>
+      <Section ariaLabel={`${item.name} details`}>
         <div className="grid gap-8 md:grid-cols-2 md:gap-12">
           <div className="aspect-square overflow-hidden rounded-lg bg-surface">
             <img
@@ -87,7 +87,7 @@ export default function ItemDetail() {
       </Section>
 
       {/* Details: materials, tags, dimensions, technique */}
-      <Section background="surface">
+      <Section background="surface" ariaLabel="Item specifications">
         <SectionHeader as="h2" headline="Details" />
         <dl className="mt-6 grid gap-x-8 gap-y-4 sm:grid-cols-2">
           <DetailRow label="Materials" value={item.materials.join(", ")} />

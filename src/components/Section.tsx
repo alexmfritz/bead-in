@@ -17,6 +17,13 @@ interface SectionProps {
    *   container accommodates a sidebar + multi-column items.
    */
   width?: "default" | "narrow" | "wide";
+  /**
+   * Accessible name exposed via `aria-label`. When set, the `<section>`
+   * becomes a navigable landmark for screen-reader users. Use a concise
+   * topic phrase ("Featured work", "Meet the artists") — it's read aloud
+   * as "[label], region".
+   */
+  ariaLabel?: string;
   children: ReactNode;
 }
 
@@ -35,13 +42,14 @@ const WIDTH_CLASSES: Record<NonNullable<SectionProps["width"]>, string> = {
 export default function Section({
   background = "bg",
   width = "default",
+  ariaLabel,
   children,
 }: SectionProps) {
   const bgClass = background === "surface" ? "bg-surface" : "bg-bg";
   const widthClass = WIDTH_CLASSES[width];
 
   return (
-    <section className={bgClass}>
+    <section className={bgClass} aria-label={ariaLabel}>
       <div className={`mx-auto ${widthClass} px-4 py-16 md:py-24`}>
         {children}
       </div>

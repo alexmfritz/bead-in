@@ -83,7 +83,7 @@ export default function Contact() {
   return (
     <>
       {/* ---------- Hero ---------- */}
-      <Section background="surface">
+      <Section background="surface" ariaLabel="Contact page introduction">
         <motion.div
           className="mx-auto max-w-2xl space-y-6 text-center"
           initial={{ opacity: 0, y: 20 }}
@@ -114,7 +114,7 @@ export default function Contact() {
       </Section>
 
       {/* ---------- Form ---------- */}
-      <Section width="narrow">
+      <Section width="narrow" ariaLabel="Inquiry form">
         {!FORMSPREE_URL ? (
           <div className="rounded-lg border border-border bg-surface p-6 text-center text-sm text-text-muted">
             <p className="font-medium text-text">Formspree not configured</p>
@@ -147,7 +147,7 @@ export default function Contact() {
           <form onSubmit={handleSubmit} className="space-y-6">
             {status === "error" && (
               <div
-                className="rounded-md border border-red-400/30 bg-red-400/10 p-4 text-sm text-red-300"
+                className="rounded-md border border-error-border bg-error-bg p-4 text-sm text-error-text"
                 role="alert"
                 aria-live="polite"
               >
@@ -159,7 +159,7 @@ export default function Contact() {
             {/* Name */}
             <div className="space-y-1.5">
               <label htmlFor="name" className="text-sm font-medium text-text">
-                Name <span className="text-red-400">*</span>
+                Name <span className="text-error-text" aria-hidden="true">*</span>
               </label>
               <input
                 id="name"
@@ -184,7 +184,7 @@ export default function Contact() {
                 ]}
                 value={contactMethod}
                 onChange={(v) => setContactMethod(v as ContactMethod)}
-                name="contact-method"
+                groupLabel="Preferred contact method"
               />
             </div>
 
@@ -195,7 +195,7 @@ export default function Contact() {
                   htmlFor="email"
                   className="text-sm font-medium text-text"
                 >
-                  Email <span className="text-red-400">*</span>
+                  Email <span className="text-error-text" aria-hidden="true">*</span>
                 </label>
                 <input
                   id="email"
@@ -213,7 +213,7 @@ export default function Contact() {
                   htmlFor="phone"
                   className="text-sm font-medium text-text"
                 >
-                  Phone <span className="text-red-400">*</span>
+                  Phone <span className="text-error-text" aria-hidden="true">*</span>
                 </label>
                 <input
                   id="phone"
@@ -239,7 +239,7 @@ export default function Contact() {
                 ]}
                 value={interestType}
                 onChange={(v) => setInterestType(v as InterestType)}
-                name="interest-type"
+                groupLabel="Interested in"
               />
             </div>
 
@@ -257,6 +257,7 @@ export default function Contact() {
                 </label>
                 <select
                   id="item-select"
+                  name="item"
                   value={selectedItem}
                   onChange={(e) => setSelectedItem(e.target.value)}
                   className={INPUT_CLASSES}
@@ -282,6 +283,7 @@ export default function Contact() {
                 </label>
                 <select
                   id="artist-select"
+                  name="artist"
                   value={selectedArtist}
                   onChange={(e) => setSelectedArtist(e.target.value)}
                   className={INPUT_CLASSES}
@@ -302,7 +304,7 @@ export default function Contact() {
                 htmlFor="message"
                 className="text-sm font-medium text-text"
               >
-                Message <span className="text-red-400">*</span>
+                Message <span className="text-error-text" aria-hidden="true">*</span>
               </label>
               <textarea
                 id="message"
@@ -343,21 +345,65 @@ interface SegmentedToggleProps {
   options: { value: string; label: string }[];
   value: string;
   onChange: (value: string) => void;
-  name: string;
+  /** Human-readable label exposed to screen readers via `aria-label`. */
+  groupLabel: string;
 }
 
 /**
- * Accessible segmented toggle (radio group). The active segment uses
- * accent-1 background; inactive segments use surface/border.
+ * Accessible segmented toggle (radio group) following the WAI-ARIA radio
+ * group pattern:
+ *
+ * - Single tab stop (only the checked option has `tabIndex={0}`).
+ * - ArrowRight/ArrowDown moves focus to the next option AND selects it.
+ * - ArrowLeft/ArrowUp moves focus to the previous option AND selects it.
+ * - Home/End jump to first/last option.
+ * - Wraps at the ends of the group.
+ *
+ * The active segment uses accent-1 background; inactive segments use
+ * surface/border. `groupLabel` should be human-readable text ("Preferred
+ * contact method"), not a technical slug.
  */
 function SegmentedToggle({
   options,
   value,
   onChange,
-  name,
+  groupLabel,
 }: SegmentedToggleProps) {
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLButtonElement>, i: number) => {
+    let nextIndex: number | null = null;
+
+    switch (e.key) {
+      case "ArrowRight":
+      case "ArrowDown":
+        nextIndex = (i + 1) % options.length;
+        break;
+      case "ArrowLeft":
+      case "ArrowUp":
+        nextIndex = i === 0 ? options.length - 1 : i - 1;
+        break;
+      case "Home":
+        nextIndex = 0;
+        break;
+      case "End":
+        nextIndex = options.length - 1;
+        break;
+      default:
+        return;
+    }
+
+    e.preventDefault();
+    onChange(options[nextIndex].value);
+
+    // Move focus to the newly selected option after React updates the DOM.
+    requestAnimationFrame(() => {
+      const group = e.currentTarget.parentElement;
+      const target = group?.children[nextIndex!] as HTMLElement | undefined;
+      target?.focus();
+    });
+  };
+
   return (
-    <div role="radiogroup" aria-label={name} className="flex gap-0">
+    <div role="radiogroup" aria-label={groupLabel} className="flex gap-0">
       {options.map((opt, i) => {
         const active = opt.value === value;
         return (
@@ -366,7 +412,9 @@ function SegmentedToggle({
             type="button"
             role="radio"
             aria-checked={active}
+            tabIndex={active ? 0 : -1}
             onClick={() => onChange(opt.value)}
+            onKeyDown={(e) => handleKeyDown(e, i)}
             className={`px-4 py-2 text-sm font-medium transition-colors ${
               i === 0 ? "rounded-l-md" : ""
             } ${i === options.length - 1 ? "rounded-r-md" : ""} ${

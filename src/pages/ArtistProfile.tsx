@@ -11,7 +11,7 @@ export default function ArtistProfile() {
 
   if (!artist) {
     return (
-      <Section>
+      <Section ariaLabel="Artist not found">
         <div className="space-y-6">
           <SectionHeader
             as="h1"
@@ -32,7 +32,7 @@ export default function ArtistProfile() {
   return (
     <>
       {/* Hero: photo + bio */}
-      <Section>
+      <Section ariaLabel={`About ${artist.name}`}>
         <div className="grid gap-8 md:grid-cols-2 md:gap-12">
           <div className="aspect-square overflow-hidden rounded-lg bg-surface">
             <img
@@ -70,7 +70,7 @@ export default function ArtistProfile() {
       </Section>
 
       {/* Work by this artist */}
-      <Section background="surface">
+      <Section background="surface" ariaLabel={`Work by ${artist.name}`}>
         <div className="space-y-10">
           <SectionHeader
             as="h2"

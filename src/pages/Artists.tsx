@@ -7,7 +7,7 @@ export default function Artists() {
   const artists = getActiveArtists();
 
   return (
-    <Section>
+    <Section ariaLabel="Artists">
       <div className="space-y-10">
         <SectionHeader
           as="h1"

@@ -47,7 +47,7 @@ export default function Gallery() {
 
   return (
     <>
-      <Section width="wide">
+      <Section width="wide" ariaLabel="Gallery">
         <div className="space-y-10">
           <SectionHeader
             as="h1"
