@@ -1,21 +1,64 @@
 import { useMemo, useState } from "react";
 import { getActiveArtists, items as allItems } from "@/data";
 import { useFilters } from "@/hooks/useFilters";
+import { applyDiscount } from "@/lib/format";
+import type { Item } from "@/types";
 import SectionHeader from "@/components/SectionHeader";
 import ItemCard from "@/components/ItemCard";
 import FilterPanel from "@/components/FilterPanel";
 
+type SortValue =
+  | "newest"
+  | "oldest"
+  | "price-low"
+  | "price-high"
+  | "name-asc"
+  | "name-desc";
+
+const SORT_OPTIONS: { value: SortValue; label: string }[] = [
+  { value: "newest", label: "Newest first" },
+  { value: "oldest", label: "Oldest first" },
+  { value: "price-low", label: "Price: low to high" },
+  { value: "price-high", label: "Price: high to low" },
+  { value: "name-asc", label: "Name: A to Z" },
+  { value: "name-desc", label: "Name: Z to A" },
+];
+
 /**
- * Shop page — full item catalog with sidebar filters.
+ * Pure sort — returns a new array so the source stays untouched. Price
+ * sort uses the discounted final price, matching what users see on cards.
+ */
+function sortItems(items: Item[], sort: SortValue): Item[] {
+  const out = items.slice();
+  switch (sort) {
+    case "newest":
+      return out.sort((a, b) => b.createdAt.localeCompare(a.createdAt));
+    case "oldest":
+      return out.sort((a, b) => a.createdAt.localeCompare(b.createdAt));
+    case "price-low":
+      return out.sort(
+        (a, b) => applyDiscount(a.cost).final - applyDiscount(b.cost).final,
+      );
+    case "price-high":
+      return out.sort(
+        (a, b) => applyDiscount(b.cost).final - applyDiscount(a.cost).final,
+      );
+    case "name-asc":
+      return out.sort((a, b) => a.name.localeCompare(b.name));
+    case "name-desc":
+      return out.sort((a, b) => b.name.localeCompare(a.name));
+  }
+}
+
+/**
+ * Shop page — full item catalog with sidebar filters and sort dropdown.
  *
  * Filters live in a `FilterPanel` sidebar on the left (desktop) or a
  * collapsible panel above the grid (mobile, toggled via a "Show filters"
- * button). Filter state is owned by `useFilters(allItems)` so the grid
- * always reflects the current selection.
- *
- * Results are sorted newest-first by `createdAt`. No sort dropdown yet —
- * when Alex wants other sort orders, add a sort control next to the
- * result count and sort `filteredItems` accordingly.
+ * button). Sort is a separate dropdown positioned at the top-right of
+ * the grid, independent from the filter UI. Filter state is owned by
+ * `useFilters(allItems)` and sort state is local. Results are filtered
+ * first, then sorted, so the grid always reflects both selections.
  */
 export default function Shop() {
   const artists = getActiveArtists();
@@ -25,6 +68,9 @@ export default function Shop() {
 
   // Mobile drawer state — desktop ignores this via the lg:block override.
   const [filtersOpen, setFiltersOpen] = useState(false);
+
+  // Sort state — independent from filters. Default is newest-first.
+  const [sort, setSort] = useState<SortValue>("newest");
 
   // Aggregate unique materials and tags across the full catalog so
   // filter options stay in sync with the data layer without any
@@ -45,14 +91,10 @@ export default function Shop() {
     return [...set].sort();
   }, []);
 
-  // Sort the filtered results newest-first. Stable with respect to filter
-  // state — re-runs only when `filteredItems` changes.
+  // Apply sort after filtering. Re-runs when either filters or sort change.
   const sortedItems = useMemo(
-    () =>
-      filteredItems
-        .slice()
-        .sort((a, b) => b.createdAt.localeCompare(a.createdAt)),
-    [filteredItems],
+    () => sortItems(filteredItems, sort),
+    [filteredItems, sort],
   );
 
   return (
@@ -103,6 +145,36 @@ export default function Shop() {
 
           {/* Item grid */}
           <div>
+            {/* Sort bar — count on the left, sort dropdown on the right */}
+            <div className="mb-6 flex items-center justify-between gap-4">
+              <p className="text-sm text-text-muted">
+                {sortedItems.length === totalCount
+                  ? `Showing all ${totalCount} pieces`
+                  : `Showing ${sortedItems.length} of ${totalCount} pieces`}
+              </p>
+              <div className="flex items-center gap-2">
+                <label
+                  htmlFor="shop-sort"
+                  className="hidden text-sm font-medium text-text-muted sm:inline"
+                >
+                  Sort by:
+                </label>
+                <select
+                  id="shop-sort"
+                  value={sort}
+                  onChange={(e) => setSort(e.target.value as SortValue)}
+                  aria-label="Sort items"
+                  className="rounded-md border border-border bg-bg px-3 py-2 text-sm text-text focus:border-accent-1 focus:outline-none focus:ring-1 focus:ring-accent-1"
+                >
+                  {SORT_OPTIONS.map((opt) => (
+                    <option key={opt.value} value={opt.value}>
+                      {opt.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </div>
+
             {sortedItems.length === 0 ? (
               <EmptyState onClear={clearFilters} />
             ) : (

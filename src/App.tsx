@@ -9,6 +9,7 @@ import ArtistProfile from "@/pages/ArtistProfile";
 import ItemDetail from "@/pages/ItemDetail";
 import About from "@/pages/About";
 import Contact from "@/pages/Contact";
+import Accessibility from "@/pages/Accessibility";
 import NotFound from "@/pages/NotFound";
 
 /**
@@ -37,6 +38,7 @@ export default function App() {
             <Route path="/artists/:id" element={<ArtistProfile />} />
             <Route path="/about" element={<About />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/accessibility" element={<Accessibility />} />
             <Route path="*" element={<NotFound />} />
           </Route>
         </Routes>
