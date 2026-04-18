@@ -94,7 +94,7 @@ export default function Home() {
         <div className="space-y-10">
           <SectionHeader
             headline="Meet the artists"
-            subheadline="[Two artists, collaborating via the Securus messaging system. Every piece runs through their hands.]"
+            subheadline="[The artists and developer behind Bead-In. Every piece runs through their hands — and the platform runs through Alex's.]"
             align="center"
           />
           <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
