@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       {/* ---------- 1. Hero ---------- */}
-      <section className="bg-bg">
+      <section className="bg-bg" aria-label="Welcome">
         <div className="mx-auto grid max-w-5xl gap-10 px-4 py-16 md:grid-cols-12 md:gap-12 md:py-24">
           <div className="flex flex-col justify-center gap-6 md:col-span-7">
             <SectionHeader
@@ -66,7 +66,7 @@ export default function Home() {
       </section>
 
       {/* ---------- 2. Featured work ---------- */}
-      <Section>
+      <Section ariaLabel="Latest work">
         <div className="space-y-10">
           <SectionHeader
             headline="Latest work"
@@ -90,7 +90,7 @@ export default function Home() {
       </Section>
 
       {/* ---------- 3. Meet the artists ---------- */}
-      <Section background="surface">
+      <Section background="surface" ariaLabel="Meet the artists">
         <div className="space-y-10">
           <SectionHeader
             headline="Meet the artists"
@@ -106,7 +106,7 @@ export default function Home() {
       </Section>
 
       {/* ---------- 4. Mission ---------- */}
-      <Section width="narrow">
+      <Section width="narrow" ariaLabel="Our mission">
         <div className="space-y-6 text-center">
           <SectionHeader
             eyebrow="Why we're here"
@@ -137,7 +137,7 @@ export default function Home() {
       </Section>
 
       {/* ---------- 5. Contact CTA ---------- */}
-      <Section background="surface" width="narrow">
+      <Section background="surface" width="narrow" ariaLabel="Contact call to action">
         <div className="space-y-8 text-center">
           <SectionHeader
             headline="[Interested in a piece? Start a conversation.]"
