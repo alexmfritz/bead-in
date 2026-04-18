@@ -48,8 +48,8 @@ export default function About() {
       {/* ---------- 2. Our Mission ---------- */}
       <ContentBlock
         imagePosition="left"
-        imageSrc={resolveAsset("placeholder.svg", "artists")}
-        imageAlt="Placeholder — replace with mission photo"
+        imageSrc={resolveAsset("sebastian-smith-mural.jpg", "artists")}
+        imageAlt="Sebastian Smith in front of an inspirational mural"
         background="surface"
       >
         <SectionHeader
@@ -81,8 +81,8 @@ export default function About() {
       {/* ---------- 3. How it works ---------- */}
       <ContentBlock
         imagePosition="right"
-        imageSrc={resolveAsset("placeholder.svg", "items")}
-        imageAlt="Placeholder — replace with process photo"
+        imageSrc={resolveAsset("nfl-medallions-flat.jpg", "items")}
+        imageAlt="Collection of handmade beaded NFL team medallions"
       >
         <SectionHeader
           as="h2"
@@ -129,8 +129,8 @@ export default function About() {
       {/* ---------- 4. Get in touch CTA ---------- */}
       <ContentBlock
         imagePosition="left"
-        imageSrc={resolveAsset("placeholder.svg", "artists")}
-        imageAlt="Placeholder — replace with contact photo"
+        imageSrc={resolveAsset("dreamcatchers-row.jpg", "items")}
+        imageAlt="Handmade beaded dreamcatchers"
         background="surface"
       >
         <SectionHeader
