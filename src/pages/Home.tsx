@@ -20,7 +20,7 @@ import ArtistCard from "@/components/ArtistCard";
 export default function Home() {
   const latestItems = getLatestItems(6);
   const artists = getActiveArtists();
-  const heroImage = resolveAsset("nfl-medallions-upright.jpg", "items");
+  const heroImage = resolveAsset("kc-medallion-side.jpg", "items");
 
   return (
     <>
@@ -57,7 +57,7 @@ export default function Home() {
             <div className="overflow-hidden rounded-lg border border-border bg-surface">
               <img
                 src={heroImage}
-                alt="Handmade beaded NFL team medallions on a carved wooden display board"
+                alt="Handmade beaded medallion in profile, showing intricate seed-bead detail"
                 className="block aspect-square h-full w-full object-cover"
               />
             </div>

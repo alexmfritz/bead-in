@@ -87,8 +87,8 @@ export default function About() {
       {/* ---------- 3. How it works ---------- */}
       <ContentBlock
         imagePosition="right"
-        imageSrc={resolveAsset("nfl-medallions-flat.jpg", "items")}
-        imageAlt="Collection of handmade beaded NFL team medallions"
+        imageSrc={resolveAsset("coral-mandala-earrings.jpg", "items")}
+        imageAlt="Beaded mandala fringe earrings showcasing fine seed-bead work"
         ariaLabel="How it works"
       >
         <SectionHeader
@@ -136,8 +136,8 @@ export default function About() {
       {/* ---------- 4. Get in touch CTA ---------- */}
       <ContentBlock
         imagePosition="left"
-        imageSrc={resolveAsset("dreamcatchers-row.jpg", "items")}
-        imageAlt="Handmade beaded dreamcatchers"
+        imageSrc={resolveAsset("blue-mandala-earrings.jpg", "items")}
+        imageAlt="Beaded mandala earrings with turquoise and gold fringe"
         background="surface"
         ariaLabel="Contact call to action"
       >
