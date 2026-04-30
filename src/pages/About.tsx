@@ -200,6 +200,7 @@ export default function About() {
         imagePosition="right"
         imageSrc={resolveAsset("coral-mandala-earrings.jpg", "items")}
         imageAlt="Beaded mandala fringe earrings showcasing fine seed-bead work"
+        background="surface"
         ariaLabel="How it works"
       >
         <SectionHeader
@@ -249,7 +250,6 @@ export default function About() {
         imagePosition="left"
         imageSrc={resolveAsset("blue-mandala-earrings.jpg", "items")}
         imageAlt="Beaded mandala earrings with turquoise and gold fringe"
-        background="surface"
         ariaLabel="Contact call to action"
       >
         <SectionHeader
@@ -360,13 +360,18 @@ interface StepCardProps {
 }
 
 /**
- * One step in the Materials process explainer. Renders a card with a
- * large numbered marker and title at the top, followed by body prose.
+ * One step in the Materials process explainer.
  *
- * On md+ viewports the cards alternate left/right via `ml-auto` so the
- * stack reads as a zig-zag rhythm. On mobile they collapse to full-width
- * single-column. Each card fades up on scroll-into-view (matching the
- * page's existing animation pattern), with reduced-motion respected.
+ * Layout: a relative wrapper holds the card and a decorative
+ * `BeadedOrnament` SVG positioned in the empty space opposite the card.
+ * On md+ the cards alternate left/right via `ml-auto`; on lg+ the
+ * ornament becomes visible in the now-large empty space. On mobile the
+ * card fills the full row and the ornament is hidden.
+ *
+ * Each card fades up on scroll-into-view (matches the page's existing
+ * animation pattern). Reduced-motion users get the final state
+ * immediately. Number marker is `aria-hidden` since visual ordering
+ * doesn't add semantic meaning beyond the title.
  */
 function StepCard({ number, title, side, children }: StepCardProps) {
   const shouldReduceMotion = useReducedMotion();
@@ -377,26 +382,109 @@ function StepCard({ number, title, side, children }: StepCardProps) {
     : { opacity: 0, y: 20 };
 
   return (
-    <motion.article
-      className={`max-w-2xl rounded-lg border border-border bg-surface p-6 md:p-8 ${onRight ? "md:ml-auto" : ""}`}
+    <motion.div
+      className="relative"
       initial={initial}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
-      <div className="mb-4 flex items-baseline gap-4 md:gap-5">
-        <span
-          className="font-heading text-5xl font-bold leading-none md:text-6xl"
-          style={{ color: "var(--accent-1)" }}
-          aria-hidden="true"
-        >
-          {number}
-        </span>
-        <h3 className="font-heading text-xl font-semibold leading-tight text-text md:text-2xl">
-          {title}
-        </h3>
+      {/* Decorative ornament — absolute-positioned in the empty space
+          opposite the card. Only visible on lg+ where there's room. */}
+      <div
+        className={`pointer-events-none absolute top-1/2 hidden -translate-y-1/2 lg:block ${
+          onRight ? "left-4" : "right-4"
+        }`}
+        aria-hidden="true"
+      >
+        <BeadedOrnament />
       </div>
-      <p className="text-base leading-relaxed text-text-muted">{children}</p>
-    </motion.article>
+
+      <article
+        className={`relative max-w-2xl rounded-lg border border-border bg-surface p-6 md:p-8 ${
+          onRight ? "md:ml-auto" : ""
+        }`}
+      >
+        <div className="mb-4 flex items-baseline gap-4 md:gap-5">
+          <span
+            className="font-heading text-5xl font-bold leading-none md:text-6xl"
+            style={{ color: "var(--accent-1)" }}
+            aria-hidden="true"
+          >
+            {number}
+          </span>
+          <h3 className="font-heading text-xl font-semibold leading-tight text-text md:text-2xl">
+            {title}
+          </h3>
+        </div>
+        <p className="text-base leading-relaxed text-text-muted">{children}</p>
+      </article>
+    </motion.div>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  BeadedOrnament — decorative SVG mandala for StepCard empty space   */
+/* ------------------------------------------------------------------ */
+
+/**
+ * Concentric rings of dots evoking a beadwork medallion. Inherits color
+ * via `currentColor` so it can be tinted with the accent variable from
+ * the parent. Sized at 8rem (128px) which fits comfortably in the
+ * ~22rem empty space next to a `max-w-2xl` card inside `max-w-5xl`.
+ *
+ * Three rings + center bead, with ring-to-ring rotation for visual
+ * interest:
+ *   - outer (8 dots, 0° rotation)
+ *   - middle (8 dots, 22.5° rotation — interleaved with outer)
+ *   - inner (4 dots)
+ *   - center bead
+ */
+function BeadedOrnament() {
+  return (
+    <svg
+      width="128"
+      height="128"
+      viewBox="0 0 120 120"
+      fill="currentColor"
+      xmlns="http://www.w3.org/2000/svg"
+      className="opacity-30"
+      style={{ color: "var(--accent-1)" }}
+    >
+      {/* Outer ring — 8 dots */}
+      <g>
+        <circle cx="60" cy="12" r="2.5" />
+        <circle cx="93.94" cy="26.06" r="2.5" />
+        <circle cx="108" cy="60" r="2.5" />
+        <circle cx="93.94" cy="93.94" r="2.5" />
+        <circle cx="60" cy="108" r="2.5" />
+        <circle cx="26.06" cy="93.94" r="2.5" />
+        <circle cx="12" cy="60" r="2.5" />
+        <circle cx="26.06" cy="26.06" r="2.5" />
+      </g>
+
+      {/* Middle ring — 8 smaller dots, rotated 22.5° to interleave */}
+      <g>
+        <circle cx="73.78" cy="32.96" r="1.8" />
+        <circle cx="87.04" cy="46.22" r="1.8" />
+        <circle cx="87.04" cy="73.78" r="1.8" />
+        <circle cx="73.78" cy="87.04" r="1.8" />
+        <circle cx="46.22" cy="87.04" r="1.8" />
+        <circle cx="32.96" cy="73.78" r="1.8" />
+        <circle cx="32.96" cy="46.22" r="1.8" />
+        <circle cx="46.22" cy="32.96" r="1.8" />
+      </g>
+
+      {/* Inner ring — 4 dots at cardinals */}
+      <g>
+        <circle cx="60" cy="44" r="1.6" />
+        <circle cx="76" cy="60" r="1.6" />
+        <circle cx="60" cy="76" r="1.6" />
+        <circle cx="44" cy="60" r="1.6" />
+      </g>
+
+      {/* Center bead */}
+      <circle cx="60" cy="60" r="3.5" />
+    </svg>
   );
 }
