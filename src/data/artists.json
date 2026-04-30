@@ -2,7 +2,7 @@
   {
     "id": "sebastian-smith",
     "name": "Sebastian Smith",
-    "bio": "[Artist bio — 2-3 paragraphs. Sebastian will send real bio text via Securus once the foundations site is ready for content.]",
+    "bio": "I believe everyone has unique perspective on the world they experience. As an artist, it's a driving force that I am compelled by to interpret my experiences onto various mediums. Art is a unique language that the meaning changes based on who is experiencing it; I hope to facilitate experiences with my art.\n\nThe act of creation is a mystery of unplumbed depths that each individual must discover for themselves. That journey is long and arduous enough without stigmas like \"felon\" wrapping chains around our legs and holding us in place. Even still, we must find ways to struggle on; art has a way of connecting even the darkest experiences to the brightest of lights, displaying for the world the pieces of our souls that even we may not have been aware were there.\n\nIt's not always easy.\n\nEven with all of that, we still find ways to make it work. I write, paint, draw, and bead, and I've played the guitar for years; I'm still finding new ways of expression that allow me to unburden my soul while simultaneously giving people the opportunity to do the same with what they experience through my art. It is my hope that one day I will not be remembered as \"criminal,\" \"felon,\" and \"outcast,\" but instead as \"artist,\" \"visionary,\" and \"survivor.\"",
     "photo": "sebastian-smith.jpg",
     "active": true,
     "specialties": ["beadwork", "leatherwork"]
@@ -10,10 +10,10 @@
   {
     "id": "noah-doty",
     "name": "Noah Doty",
-    "bio": "[Artist bio — 2-3 paragraphs. Noah will send real bio text via Securus once the foundations site is ready for content.]",
+    "bio": "Compassion, community, and collaboration. We as humans all share in the need to express ourselves, the need to be heard. Art is a universal language in which artists can express themselves and relate to the world around them.\n\nIt is also entirely experiential. The intent that an artist pours into one of their pieces may differ from the way it makes the viewer feel; in fact, it often does. We all get to find our own meaning in each and every piece.\n\nI believe that each work of art is a new chance for the artist and the viewer to relate with one another through the shared experiences that being human brings to all of us. Every day brings me new experiences and new stories to tell, and it is my intent to share these stories with you through my artwork. My hope when crafting these pieces is that they find a home somewhere, with someone that makes them a part of their story.",
     "photo": "artist-placeholder.jpg",
     "active": true,
-    "specialties": ["beadwork", "painting", "drawing"]
+    "specialties": ["beadwork"]
   },
   {
     "id": "alex-fritz",
