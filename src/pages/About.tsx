@@ -85,139 +85,112 @@ export default function About() {
       </ContentBlock>
 
       {/* ---------- 3. Materials & supplies ---------- */}
-      <Section width="narrow" ariaLabel="Materials and supplies">
-        <div className="space-y-10">
+      <Section ariaLabel="Materials and supplies">
+        <div className="space-y-12">
           <SectionHeader
             as="h2"
             eyebrow="Behind the work"
             headline="Materials & supplies"
             subheadline="How beadwork supplies actually reach an incarcerated artist — written by Bash."
+            align="center"
           />
-          <div className="space-y-8 text-base leading-relaxed text-text-muted">
-            <div className="space-y-3">
-              <h3 className="font-heading text-xl font-semibold text-text">
-                What is Curio?
-              </h3>
-              <p>
-                Doc Curio is an interesting animal. &ldquo;Curio&rdquo; is a
-                permit put in place that enables incarcerated individuals
-                within Washington State prisons to engage with art in
-                various forms. Getting a curio permit is free to the
-                incarcerated, but acquiring supplies is not. Once an
-                individual has a curio permit, they must then purchase a
-                &ldquo;Hobby Box&rdquo; from the facility commissary, which
-                currently for us is a 20qt clear plastic tote. You must
-                purchase the hobby box before you will be allowed to
-                purchase any art supplies. The thing that makes this
-                process so interesting is that there is no coaching, no
-                guidance about it; for me (Bash), it was trial and error
-                during my first year in prison. It&rsquo;s almost as if DOC
-                employees are just playing a game about it.
-              </p>
-            </div>
+          <div className="space-y-8 md:space-y-10">
+            <StepCard number="01" title="What is Curio?" side="left">
+              Doc Curio is an interesting animal. &ldquo;Curio&rdquo; is a
+              permit put in place that enables incarcerated individuals
+              within Washington State prisons to engage with art in various
+              forms. Getting a curio permit is free to the incarcerated,
+              but acquiring supplies is not. Once an individual has a curio
+              permit, they must then purchase a &ldquo;Hobby Box&rdquo;
+              from the facility commissary, which currently for us is a
+              20qt clear plastic tote. You must purchase the hobby box
+              before you will be allowed to purchase any art supplies. The
+              thing that makes this process so interesting is that there is
+              no coaching, no guidance about it; for me (Bash), it was
+              trial and error during my first year in prison. It&rsquo;s
+              almost as if DOC employees are just playing a game about it.
+            </StepCard>
 
-            <div className="space-y-3">
-              <h3 className="font-heading text-xl font-semibold text-text">
-                The hobby box
-              </h3>
-              <p>
-                Regardless, once the hobby box has been acquired, you may
-                then begin filling it with supplies. Until recently, there
-                were separate permits for every type of art we were allowed
-                to engage with: drawing, beading, model-making, yarn/string,
-                and music. But they now have only a single permit that
-                covers all of the various art forms DOC allows. Along with
-                that change, they update the list of items any one person
-                is able to have inside their hobby box at one time.
-                Purchasing supplies can be a headache in itself; if you
-                don&rsquo;t know what you&rsquo;re allowed to have (either
-                because you&rsquo;re new to the system or because the list
-                of allowable items is uninformative, incomplete, or too
-                vague to understand), you play another sort of game with
-                DOC employees to order supplies.
-              </p>
-            </div>
+            <StepCard number="02" title="The hobby box" side="right">
+              Regardless, once the hobby box has been acquired, you may
+              then begin filling it with supplies. Until recently, there
+              were separate permits for every type of art we were allowed
+              to engage with: drawing, beading, model-making, yarn/string,
+              and music. But they now have only a single permit that covers
+              all of the various art forms DOC allows. Along with that
+              change, they update the list of items any one person is able
+              to have inside their hobby box at one time. Purchasing
+              supplies can be a headache in itself; if you don&rsquo;t know
+              what you&rsquo;re allowed to have (either because you&rsquo;re
+              new to the system or because the list of allowable items is
+              uninformative, incomplete, or too vague to understand), you
+              play another sort of game with DOC employees to order
+              supplies.
+            </StepCard>
 
-            <div className="space-y-3">
-              <h3 className="font-heading text-xl font-semibold text-text">
-                How we pay for supplies
-              </h3>
-              <p>
-                The biggest hurdle that must be overcome with ordering
-                supplies is that DOC has a stranglehold on how we can
-                purchase them; all of the money must be on our
-                &ldquo;Spendable&rdquo; account when we make an order. The
-                spendable account can have money put in it through
-                paychecks from inmate jobs, or friends and family can
-                deposit money into it. Any money put into the spendable
-                account is subject to deductions of up to 95% if the total
-                on the account would exceed $25, meaning that if I have $25
-                leftover from my paycheck and my dad puts $100 into the
-                account and my &ldquo;tax&rdquo; (what we call the
-                deductions) is 95%, I only get $5 out of that $100. The tax
-                range can be as low as 5% (for lifers), but almost everyone
-                averages out at about 55%.
-              </p>
-            </div>
+            <StepCard
+              number="03"
+              title="How we pay for supplies"
+              side="left"
+            >
+              The biggest hurdle that must be overcome with ordering
+              supplies is that DOC has a stranglehold on how we can
+              purchase them; all of the money must be on our
+              &ldquo;Spendable&rdquo; account when we make an order. The
+              spendable account can have money put in it through paychecks
+              from inmate jobs, or friends and family can deposit money
+              into it. Any money put into the spendable account is subject
+              to deductions of up to 95% if the total on the account would
+              exceed $25, meaning that if I have $25 leftover from my
+              paycheck and my dad puts $100 into the account and my
+              &ldquo;tax&rdquo; (what we call the deductions) is 95%, I
+              only get $5 out of that $100. The tax range can be as low as
+              5% (for lifers), but almost everyone averages out at about
+              55%.
+            </StepCard>
 
-            <div className="space-y-3">
-              <h3 className="font-heading text-xl font-semibold text-text">
-                Placing an order
-              </h3>
-              <p>
-                Once you have the money, you fill out a Transfer of Funds
-                request and get it signed by someone in a CO&rsquo;s
-                position or higher (depending on the amount). Once signed,
-                you send it and the order form for the supplies in an
-                envelope you&rsquo;ve addressed to the company you&rsquo;re
-                ordering from to the Recreation Specialist (the person in
-                charge of recreational activities, which curio falls under)
-                for approval. Once you have placed your order, you are at
-                the whims of the Recreation Specialist as to when the order
-                gets processed. Once they&rsquo;ve approved the order, they
-                send the transfer of funds request to the Banking
-                department, who will check to see if you do, in fact, have
-                the money to deduct from your spendable account. Once
-                they&rsquo;ve processed the money, they ship the order out
-                to the vendor, and you wait for the order to be filled.
-                Once filled, it gets shipped back to the facility, and you
-                wait to be put on a callout (usually Thursday mornings for
-                us) to go down to the property building to pick up your new
-                supplies.
-              </p>
-            </div>
+            <StepCard number="04" title="Placing an order" side="right">
+              Once you have the money, you fill out a Transfer of Funds
+              request and get it signed by someone in a CO&rsquo;s position
+              or higher (depending on the amount). Once signed, you send it
+              and the order form for the supplies in an envelope
+              you&rsquo;ve addressed to the company you&rsquo;re ordering
+              from to the Recreation Specialist (the person in charge of
+              recreational activities, which curio falls under) for
+              approval. Once you have placed your order, you are at the
+              whims of the Recreation Specialist as to when the order gets
+              processed. Once they&rsquo;ve approved the order, they send
+              the transfer of funds request to the Banking department, who
+              will check to see if you do, in fact, have the money to
+              deduct from your spendable account. Once they&rsquo;ve
+              processed the money, they ship the order out to the vendor,
+              and you wait for the order to be filled. Once filled, it gets
+              shipped back to the facility, and you wait to be put on a
+              callout (usually Thursday mornings for us) to go down to the
+              property building to pick up your new supplies.
+            </StepCard>
 
-            <div className="space-y-3">
-              <h3 className="font-heading text-xl font-semibold text-text">
-                Our suppliers
-              </h3>
-              <p>
-                We order our bead supplies mainly through Baker Bay Beading
-                Company, out of Dorena, Oregon, but our secondary supplier
-                is Crazy Crow. Our model supplies come through Model Empire
-                if they aren&rsquo;t handmade, our yarn/string through
-                Herrschners, and any other art supplies are purchased
-                through Dick Blick or United Art and Education. At this
-                time, we are only outfitted to use this platform for the
-                sale of beadwork; in the future, we will add other artists
-                and art forms, based on what our artists are creating.
-              </p>
-            </div>
+            <StepCard number="05" title="Our suppliers" side="left">
+              We order our bead supplies mainly through Baker Bay Beading
+              Company, out of Dorena, Oregon, but our secondary supplier is
+              Crazy Crow. Our model supplies come through Model Empire if
+              they aren&rsquo;t handmade, our yarn/string through
+              Herrschners, and any other art supplies are purchased through
+              Dick Blick or United Art and Education. At this time, we are
+              only outfitted to use this platform for the sale of beadwork;
+              in the future, we will add other artists and art forms, based
+              on what our artists are creating.
+            </StepCard>
 
-            <div className="space-y-3">
-              <h3 className="font-heading text-xl font-semibold text-text">
-                What to expect
-              </h3>
-              <p>
-                The process for ordering supplies itself can take months.
-                It usually only takes about 4&ndash;6 weeks, but we have
-                seen it take much longer before. When inquiring about a
-                custom piece, bear in mind we strive to have the supplies
-                on hand to fill the order; if we don&rsquo;t, we&rsquo;ll
-                tell you so, and we&rsquo;ll keep you posted as your order
-                moves through each step of the process as it continues.
-              </p>
-            </div>
+            <StepCard number="06" title="What to expect" side="right">
+              The process for ordering supplies itself can take months. It
+              usually only takes about 4&ndash;6 weeks, but we have seen it
+              take much longer before. When inquiring about a custom piece,
+              bear in mind we strive to have the supplies on hand to fill
+              the order; if we don&rsquo;t, we&rsquo;ll tell you so, and
+              we&rsquo;ll keep you posted as your order moves through each
+              step of the process as it continues.
+            </StepCard>
           </div>
         </div>
       </Section>
@@ -372,5 +345,58 @@ function ContentBlock({
         </motion.div>
       </div>
     </Section>
+  );
+}
+
+/* ------------------------------------------------------------------ */
+/*  StepCard — numbered card for the Materials process                 */
+/* ------------------------------------------------------------------ */
+
+interface StepCardProps {
+  number: string;
+  title: string;
+  side: "left" | "right";
+  children: React.ReactNode;
+}
+
+/**
+ * One step in the Materials process explainer. Renders a card with a
+ * large numbered marker and title at the top, followed by body prose.
+ *
+ * On md+ viewports the cards alternate left/right via `ml-auto` so the
+ * stack reads as a zig-zag rhythm. On mobile they collapse to full-width
+ * single-column. Each card fades up on scroll-into-view (matching the
+ * page's existing animation pattern), with reduced-motion respected.
+ */
+function StepCard({ number, title, side, children }: StepCardProps) {
+  const shouldReduceMotion = useReducedMotion();
+  const onRight = side === "right";
+
+  const initial = shouldReduceMotion
+    ? { opacity: 1, y: 0 }
+    : { opacity: 0, y: 20 };
+
+  return (
+    <motion.article
+      className={`max-w-2xl rounded-lg border border-border bg-surface p-6 md:p-8 ${onRight ? "md:ml-auto" : ""}`}
+      initial={initial}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.5, ease: "easeOut" }}
+    >
+      <div className="mb-4 flex items-baseline gap-4 md:gap-5">
+        <span
+          className="font-heading text-5xl font-bold leading-none md:text-6xl"
+          style={{ color: "var(--accent-1)" }}
+          aria-hidden="true"
+        >
+          {number}
+        </span>
+        <h3 className="font-heading text-xl font-semibold leading-tight text-text md:text-2xl">
+          {title}
+        </h3>
+      </div>
+      <p className="text-base leading-relaxed text-text-muted">{children}</p>
+    </motion.article>
   );
 }
