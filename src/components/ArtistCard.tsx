@@ -8,15 +8,16 @@ interface ArtistCardProps {
 }
 
 /**
- * Strip bracketed placeholder text and clamp to ~160 characters so the
- * card stays a predictable height even while bios are placeholders.
- * When real bios land, the clamp is still useful — the full bio lives
- * on the artist profile page.
+ * Build a short bio preview for the card. Bios may contain `\n\n`
+ * paragraph separators (real bios are multi-paragraph); collapse all
+ * whitespace to single spaces before clamping so the preview reads as
+ * one flowing line. Keeps the card a predictable height regardless of
+ * whether the bio is a one-liner or several paragraphs.
  */
 const previewBio = (bio: string): string => {
-  const trimmed = bio.trim();
-  if (trimmed.length <= 160) return trimmed;
-  return `${trimmed.slice(0, 160).trimEnd()}…`;
+  const normalized = bio.replace(/\s+/g, " ").trim();
+  if (normalized.length <= 160) return normalized;
+  return `${normalized.slice(0, 160).trimEnd()}…`;
 };
 
 /**

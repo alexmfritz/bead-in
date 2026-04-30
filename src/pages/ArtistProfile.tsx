@@ -58,9 +58,11 @@ export default function ArtistProfile() {
               </div>
             )}
 
-            <p className="text-lg leading-relaxed text-text-muted">
-              {artist.bio}
-            </p>
+            <div className="space-y-4 text-lg leading-relaxed text-text-muted">
+              {artist.bio.split("\n\n").map((paragraph, i) => (
+                <p key={i}>{paragraph}</p>
+              ))}
+            </div>
 
             <Link to="/artists" className="font-medium">
               ← Back to all artists
