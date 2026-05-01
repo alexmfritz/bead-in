@@ -390,10 +390,13 @@ function StepCard({ number, title, side, children }: StepCardProps) {
       transition={{ duration: 0.5, ease: "easeOut" }}
     >
       {/* Decorative ornament — absolute-positioned in the empty space
-          opposite the card. Only visible on lg+ where there's room. */}
+          opposite the card, centered horizontally within the 22rem gap
+          between card and container edge. Only visible on lg+ where
+          there's room (320px empty space at lg, fits the 192px ornament
+          with 64px breathing room on each side). */}
       <div
         className={`pointer-events-none absolute top-1/2 hidden -translate-y-1/2 lg:block ${
-          onRight ? "left-4" : "right-4"
+          onRight ? "left-16" : "right-16"
         }`}
         aria-hidden="true"
       >
@@ -430,61 +433,66 @@ function StepCard({ number, title, side, children }: StepCardProps) {
 /**
  * Concentric rings of dots evoking a beadwork medallion. Inherits color
  * via `currentColor` so it can be tinted with the accent variable from
- * the parent. Sized at 8rem (128px) which fits comfortably in the
- * ~22rem empty space next to a `max-w-2xl` card inside `max-w-5xl`.
+ * the parent. Sized at 12rem (192px) — large enough to register as a
+ * decorative element rather than a stray detail, while still fitting
+ * comfortably in the 20rem empty space next to a `max-w-2xl` card
+ * inside `max-w-5xl`.
  *
  * Three rings + center bead, with ring-to-ring rotation for visual
  * interest:
  *   - outer (8 dots, 0° rotation)
  *   - middle (8 dots, 22.5° rotation — interleaved with outer)
- *   - inner (4 dots)
+ *   - inner (4 dots at cardinals)
  *   - center bead
+ *
+ * Opacity is set to 60% so the ornament reads as present and intentional
+ * across all 8 theme variants without competing with the card content.
  */
 function BeadedOrnament() {
   return (
     <svg
-      width="128"
-      height="128"
+      width="192"
+      height="192"
       viewBox="0 0 120 120"
       fill="currentColor"
       xmlns="http://www.w3.org/2000/svg"
-      className="opacity-30"
+      className="opacity-60"
       style={{ color: "var(--accent-1)" }}
     >
       {/* Outer ring — 8 dots */}
       <g>
-        <circle cx="60" cy="12" r="2.5" />
-        <circle cx="93.94" cy="26.06" r="2.5" />
-        <circle cx="108" cy="60" r="2.5" />
-        <circle cx="93.94" cy="93.94" r="2.5" />
-        <circle cx="60" cy="108" r="2.5" />
-        <circle cx="26.06" cy="93.94" r="2.5" />
-        <circle cx="12" cy="60" r="2.5" />
-        <circle cx="26.06" cy="26.06" r="2.5" />
+        <circle cx="60" cy="12" r="3" />
+        <circle cx="93.94" cy="26.06" r="3" />
+        <circle cx="108" cy="60" r="3" />
+        <circle cx="93.94" cy="93.94" r="3" />
+        <circle cx="60" cy="108" r="3" />
+        <circle cx="26.06" cy="93.94" r="3" />
+        <circle cx="12" cy="60" r="3" />
+        <circle cx="26.06" cy="26.06" r="3" />
       </g>
 
       {/* Middle ring — 8 smaller dots, rotated 22.5° to interleave */}
       <g>
-        <circle cx="73.78" cy="32.96" r="1.8" />
-        <circle cx="87.04" cy="46.22" r="1.8" />
-        <circle cx="87.04" cy="73.78" r="1.8" />
-        <circle cx="73.78" cy="87.04" r="1.8" />
-        <circle cx="46.22" cy="87.04" r="1.8" />
-        <circle cx="32.96" cy="73.78" r="1.8" />
-        <circle cx="32.96" cy="46.22" r="1.8" />
-        <circle cx="46.22" cy="32.96" r="1.8" />
+        <circle cx="73.78" cy="32.96" r="2.2" />
+        <circle cx="87.04" cy="46.22" r="2.2" />
+        <circle cx="87.04" cy="73.78" r="2.2" />
+        <circle cx="73.78" cy="87.04" r="2.2" />
+        <circle cx="46.22" cy="87.04" r="2.2" />
+        <circle cx="32.96" cy="73.78" r="2.2" />
+        <circle cx="32.96" cy="46.22" r="2.2" />
+        <circle cx="46.22" cy="32.96" r="2.2" />
       </g>
 
       {/* Inner ring — 4 dots at cardinals */}
       <g>
-        <circle cx="60" cy="44" r="1.6" />
-        <circle cx="76" cy="60" r="1.6" />
-        <circle cx="60" cy="76" r="1.6" />
-        <circle cx="44" cy="60" r="1.6" />
+        <circle cx="60" cy="44" r="2" />
+        <circle cx="76" cy="60" r="2" />
+        <circle cx="60" cy="76" r="2" />
+        <circle cx="44" cy="60" r="2" />
       </g>
 
       {/* Center bead */}
-      <circle cx="60" cy="60" r="3.5" />
+      <circle cx="60" cy="60" r="4.5" />
     </svg>
   );
 }
