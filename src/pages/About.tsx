@@ -21,7 +21,7 @@ export default function About() {
   return (
     <>
       {/* ---------- 1. Hero ---------- */}
-      <Section background="surface" ariaLabel="About Bead-In">
+      <Section ariaLabel="About Bead-In">
         <motion.div
           className="mx-auto max-w-2xl space-y-6 text-center"
           initial={heroInitial}
