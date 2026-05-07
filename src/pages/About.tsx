@@ -95,99 +95,102 @@ export default function About() {
             align="center"
           />
           <div className="space-y-8 md:space-y-10">
-            <StepCard number="01" title="What is Curio?" side="left">
-              Doc Curio is an interesting animal. &ldquo;Curio&rdquo; is a
+            <StepCard
+              number="01"
+              title={"What is “Curio”?"}
+              side="left"
+            >
+              DOC Curio is an interesting animal. &ldquo;Curio&rdquo; is a
               permit put in place that enables incarcerated individuals
               within Washington State prisons to engage with art in various
-              forms. Getting a curio permit is free to the incarcerated,
-              but acquiring supplies is not. Once an individual has a curio
-              permit, they must then purchase a &ldquo;Hobby Box&rdquo;
-              from the facility commissary, which currently for us is a
-              20qt clear plastic tote. You must purchase the hobby box
-              before you will be allowed to purchase any art supplies. The
-              thing that makes this process so interesting is that there is
-              no coaching, no guidance about it; for me (Bash), it was
-              trial and error during my first year in prison. It&rsquo;s
-              almost as if DOC employees are just playing a game about it.
+              forms. Getting a curio permit is free to the incarcerated.
+              Once an individual has a permit, they must purchase a
+              &ldquo;Hobby Box&rdquo; from the facility commissary. Once
+              they have the hobby box, they&rsquo;re allowed to purchase
+              supplies. What&rsquo;s striking about the process is that
+              there&rsquo;s no guidance through it; for me (Bash), it was
+              trial and error during my first year in prison.
             </StepCard>
 
-            <StepCard number="02" title="The hobby box" side="right">
-              Regardless, once the hobby box has been acquired, you may
-              then begin filling it with supplies. Until recently, there
-              were separate permits for every type of art we were allowed
-              to engage with: drawing, beading, model-making, yarn/string,
-              and music. But they now have only a single permit that covers
-              all of the various art forms DOC allows. Along with that
-              change, they update the list of items any one person is able
-              to have inside their hobby box at one time. Purchasing
-              supplies can be a headache in itself; if you don&rsquo;t know
-              what you&rsquo;re allowed to have (either because you&rsquo;re
-              new to the system or because the list of allowable items is
-              uninformative, incomplete, or too vague to understand), you
-              play another sort of game with DOC employees to order
-              supplies.
+            <StepCard
+              number="02"
+              title="What is the Hobby Box?"
+              side="right"
+            >
+              The hobby box, currently, is a 20qt clear plastic tote. It is
+              used for storing whatever supplies have been purchased by
+              the individual. Once the hobby box has been acquired, they
+              may begin filling it with said supplies. Purchasing supplies
+              can be a headache in itself; if you don&rsquo;t know what
+              you&rsquo;re allowed to have (either because you&rsquo;re new
+              to the system, or because you&rsquo;ve never done it before,
+              or for some other reason), ordering supplies becomes its own
+              kind of guessing game.
             </StepCard>
 
             <StepCard
               number="03"
-              title="How we pay for supplies"
+              title="How do we pay for supplies?"
               side="left"
             >
-              The biggest hurdle that must be overcome with ordering
-              supplies is that DOC has a stranglehold on how we can
-              purchase them; all of the money must be on our
-              &ldquo;Spendable&rdquo; account when we make an order. The
-              spendable account can have money put in it through paychecks
-              from inmate jobs, or friends and family can deposit money
-              into it. Any money put into the spendable account is subject
-              to deductions of up to 95% if the total on the account would
-              exceed $25, meaning that if I have $25 leftover from my
-              paycheck and my dad puts $100 into the account and my
-              &ldquo;tax&rdquo; (what we call the deductions) is 95%, I
-              only get $5 out of that $100. The tax range can be as low as
-              5% (for lifers), but almost everyone averages out at about
-              55%.
+              The biggest hurdle we must overcome when ordering supplies is
+              that DOC has a stranglehold on <em>how</em> we can purchase
+              them: all of the money must be on our &ldquo;Spendable&rdquo;
+              account when we make an order. The spendable account can have
+              money put in it through paychecks from inmate jobs, or
+              friends and family can deposit money into it. Any money put
+              into this account is subject to deductions (what we call
+              &ldquo;taxes&rdquo;) of up to 95 percent if the total on the
+              account would exceed $25. This means that if I have $25
+              leftover from my paycheck, and my dad puts $100 on the
+              account and my tax is 95 percent, I will only get $5 out of
+              the $100. The tax range can be as low as 5 percent (for
+              lifers), but almost everyone averages out at 55 percent.
             </StepCard>
 
-            <StepCard number="04" title="Placing an order" side="right">
-              Once you have the money, you fill out a Transfer of Funds
-              request and get it signed by someone in a CO&rsquo;s position
-              or higher (depending on the amount). Once signed, you send it
-              and the order form for the supplies in an envelope
-              you&rsquo;ve addressed to the company you&rsquo;re ordering
-              from to the Recreation Specialist (the person in charge of
-              recreational activities, which curio falls under) for
-              approval. Once you have placed your order, you are at the
-              whims of the Recreation Specialist as to when the order gets
-              processed. Once they&rsquo;ve approved the order, they send
-              the transfer of funds request to the Banking department, who
-              will check to see if you do, in fact, have the money to
-              deduct from your spendable account. Once they&rsquo;ve
-              processed the money, they ship the order out to the vendor,
-              and you wait for the order to be filled. Once filled, it gets
-              shipped back to the facility, and you wait to be put on a
-              callout (usually Thursday mornings for us) to go down to the
-              property building to pick up your new supplies.
+            <StepCard
+              number="04"
+              title="How do we place an order?"
+              side="right"
+            >
+              Once the individual has the money, they fill out a Transfer
+              of Funds Request and get it signed by someone in a
+              CO&rsquo;s position or higher (depending on the amount), and
+              send it to the Recreation Specialist (RS) for approval. Once
+              approved, the RS sends the transfer to the Banking
+              Department, who checks to see the money is actually on the
+              account, and deducts the funds. Once the money&rsquo;s been
+              processed, they ship the order out to the vendor, and we
+              wait for the order to be filled. Once it gets filled,
+              it&rsquo;s shipped back to the facility, and we get put on a
+              callout to go down to property to pick up the new supplies.
             </StepCard>
 
-            <StepCard number="05" title="Our suppliers" side="left">
-              We order our bead supplies mainly through Baker Bay Beading
-              Company, out of Dorena, Oregon, but our secondary supplier is
-              Crazy Crow. Our model supplies come through Model Empire if
-              they aren&rsquo;t handmade, our yarn/string through
-              Herrschners, and any other art supplies are purchased through
-              Dick Blick or United Art and Education. At this time, we are
-              only outfitted to use this platform for the sale of beadwork;
-              in the future, we will add other artists and art forms, based
-              on what our artists are creating.
+            <StepCard
+              number="05"
+              title="Where do we get our supplies?"
+              side="left"
+            >
+              We order mainly through Baker Bay Beading Company, with a
+              secondary vendor Crazy Crow. Our model supplies come through
+              Model Empire, if the models aren&rsquo;t handmade. Yarn and
+              String come through Herrschners, while any other art supplies
+              come through Dick Blick or United Art and Education. At this
+              time, we are only outfitted to use this platform for the sale
+              of beadwork; in the future, we will add other artists and art
+              forms, based on what our artists are creating.
             </StepCard>
 
-            <StepCard number="06" title="What to expect" side="right">
-              The process for ordering supplies itself can take months. It
+            <StepCard
+              number="06"
+              title="What can customers expect?"
+              side="right"
+            >
+              The process for ordering our supplies can take months. It
               usually only takes about 4&ndash;6 weeks, but we have seen it
               take much longer before. When inquiring about a custom piece,
-              bear in mind we strive to have the supplies on hand to fill
-              the order; if we don&rsquo;t, we&rsquo;ll tell you so, and
+              bear in mind that we strive to have the supplies on hand to
+              fill the order. If we don&rsquo;t, we&rsquo;ll tell you, and
               we&rsquo;ll keep you posted as your order moves through each
               step of the process as it continues.
             </StepCard>
