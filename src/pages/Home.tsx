@@ -25,7 +25,7 @@ export default function Home() {
   return (
     <>
       {/* ---------- 1. Hero ---------- */}
-      <section className="bg-bg" aria-label="Welcome">
+      <section className="bg-surface" aria-label="Welcome">
         <div className="mx-auto grid max-w-5xl gap-10 px-4 py-16 md:grid-cols-12 md:gap-12 md:py-24">
           <div className="flex flex-col justify-center gap-6 md:col-span-7">
             <SectionHeader
