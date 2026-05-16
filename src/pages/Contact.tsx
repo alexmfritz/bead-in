@@ -116,13 +116,29 @@ export default function Contact() {
       {/* ---------- Form ---------- */}
       <Section width="narrow" ariaLabel="Inquiry form">
         {!FORMSPREE_URL ? (
-          <div className="rounded-lg border border-border bg-surface p-6 text-center text-sm text-text-muted">
-            <p className="font-medium text-text">Formspree not configured</p>
-            <p className="mt-1">
-              Set <code className="text-accent-1">VITE_FORMSPREE_URL</code> in{" "}
-              <code>.env.local</code> to enable form submissions.
-            </p>
-          </div>
+          import.meta.env.DEV ? (
+            /* Dev-only affordance — never reaches real visitors because
+               import.meta.env.DEV is false in production builds. */
+            <div className="rounded-lg border border-border bg-surface p-6 text-center text-sm text-text-muted">
+              <p className="font-medium text-text">Formspree not configured</p>
+              <p className="mt-1">
+                Set <code className="text-accent-1">VITE_FORMSPREE_URL</code>{" "}
+                in <code>.env.local</code> (local) or the project&rsquo;s
+                Vercel environment variables (production) to enable the form.
+              </p>
+            </div>
+          ) : (
+            /* Production-facing graceful fallback. */
+            <div className="rounded-lg border border-border bg-surface p-6 text-center">
+              <p className="font-medium text-text">
+                The inquiry form is temporarily unavailable
+              </p>
+              <p className="mt-1 text-sm text-text-muted">
+                We&rsquo;re sorry for the inconvenience — please check back
+                soon. We&rsquo;re working to get it back up.
+              </p>
+            </div>
+          )
         ) : status === "success" ? (
           <div className="space-y-6 text-center">
             <h2 className="font-heading text-2xl font-bold text-text">
